@@ -1,0 +1,131 @@
+﻿@using System.Web.Mvc.Html
+@using KKU_DEMO.App_Start
+@model IEnumerable <KKU_DEMO.Models.Sensor>
+
+@{
+    ViewBag.Title = "Home Page";
+
+   
+
+}
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/InfoPopUp.js"></script>
+    <script src="~/Scripts/SendReq.js"></script>
+    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+</head>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2>Информация о устройстве:</h2>
+                
+            </div>
+            <div class="modal-body">
+                <div id="Details">
+                    <img id="pic" src="~/Content/Image/spinner.gif" width="100%" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<hr />
+<div id='table'></div>
+<hr />
+
+@*<div id="chartContainer" style="height: 300px; width: 50%;"></div>*@
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var dataPoints = [], chart;
+
+        // initial chart
+        $.getJSON("@Strings.HostUrl/Chart/json", function (data) {
+            dataPoints = data;
+
+            chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                backgroundColor: "#eee",
+                theme: "theme1",//theme1
+                axisX: {
+                    
+                   
+                },
+                axisY: {
+                    minimum: 880
+                },
+                title: {
+                    text: "Показания входного датчика"
+                },
+                data: [
+                  {
+                      // Change type to "bar", "splineArea", "area", "spline", "pie",etc.
+                      type: "line",
+                      color: "#d9534f",
+                      xValueType: "dateTime",
+                      dataPoints: dataPoints
+                  }
+                ]
+
+            });
+            
+            chart.render();
+            setTimeout(function () { updateChart() }, 3000);
+        });
+
+        function updateChart() {
+            $.getJSON("@Strings.HostUrl/Chart/json", function (data) {
+
+               
+                $.each(data, function (index) {
+                   
+                    dataPoints.push(data[index]);
+                });
+               
+                chart.axisY[0].set("minimum", dataPoints[0].y-10, true);
+                
+                chart.render();
+                setTimeout(function () { updateChart() }, 3000);
+            });
+        }
+
+    });
+</script>
+
+
+
+<script>
+
+    function show() {
+        $.ajax({
+            url: "@Strings.HostUrl/Sensor/Update",
+            cache: false,
+            success: function(html) {
+                $("#table").html(html);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        show();
+        setInterval('show()', 3000);
+    });
+    </script>
+
+
+
+

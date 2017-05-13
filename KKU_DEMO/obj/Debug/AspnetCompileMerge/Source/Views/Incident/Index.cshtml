@@ -1,0 +1,112 @@
+﻿@using KKU_DEMO.App_Start
+@using KKU_DEMO.Helpers
+@using KKU_DEMO.Models.AuthModels
+@model IEnumerable<KKU_DEMO.Models.Incident>
+
+<head>
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/InfoPopUp.js"></script>
+
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="~/Content/bootstrap-select.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-select.min.css">
+
+
+</head>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2>Выберите причину инцидента</h2>
+
+            </div>
+            <div class="modal-body">
+                <div id="Details">
+                    <img id="pic" src="~/Content/Image/spinner.gif" width="100%"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<h2>@ViewBag.Title</h2>
+<table class="table">
+    <tr>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.Time)</b>
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.Sensor.Factory.Name)</b>
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.Sensor.Name)</b>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shift.UserId)
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.State)</b>
+        </th>
+        <th>
+            <b>@Html.DisplayNameFor(model => model.CauseId)</b>
+        </th>
+        <th>
+
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sensor.Factory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sensor.Name)
+            </td>
+            <td>
+                @Html.GetName(item.Shift.UserId)
+            </td>
+            <td>
+                @Html.Translate(item.State,true)
+            </td>
+            <td>
+                @{
+                    if (item.StateEnum != StateEnum.OPENED)
+                    {
+                        @Html.DisplayFor(modelItem => item.Cause.Name)
+                    }
+                    else
+                    {
+                        <button type="button" id="ModalButton" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" style="float: left; margin: 0 10px;" onclick="info('@item.Id', '@Strings.HostUrl/Incident/SetCause/')">Определить</button>
+
+                    }
+                }
+            </td>
+            
+        </tr>
+    }
+
+</table>
+
+
+

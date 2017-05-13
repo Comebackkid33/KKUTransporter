@@ -1,0 +1,67 @@
+﻿@using KKU_DEMO.App_Start
+@model dynamic
+
+@{
+    ViewBag.Title = "title";
+}
+<audio id="myAudio">
+
+    <source src="~/Content/bell_ring.mp3" type="audio/mpeg">
+
+</audio>
+<script type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript"
+        src="~/Scripts/push.js"></script>
+
+
+<h1 style="text-align: center">Производственный календарь на 2017 год</h1>
+<div style="text-align: center">
+    <a href="#" onclick="slide(0)">I квартал</a> | <a href="#" onclick="slide(1)">II квартал</a> | <a href="#" onclick="slide(2)">III квартал</a> | <a href="#" onclick="slide(3)">IV квартал</a>
+</div>
+<img id="pic" src="~/Content/Image/Calendar/Kvartal1.png" width="100%"/>
+<input type="button" name="send" value="отправить">
+
+<script language="javascript">
+    var index = 0;
+    var links = new Array(
+        "@Strings.HostUrl/Content/Image/Calendar/Kvartal1.png",
+        "@Strings.HostUrl/Content/Image/Calendar/Kvartal2.png",
+        "@Strings.HostUrl/Content/Image/Calendar/Kvartal3.png",
+        "@Strings.HostUrl/Content/Image/Calendar/Kvartal4.png"
+    );
+
+    function slide(v) {
+        var element = document.getElementById("pic");
+        element.src = links[v];
+    }
+
+    $(function() {
+        $("input[name=send]").on("click", notifyMe);
+    });
+
+    document.addEventListener('DOMContentLoaded',
+        function() {
+            if (!Notification) {
+                alert('Desktop notifications not available in your browser. Try Chromium.');
+                return;
+            }
+
+            if (Notification.permission !== "granted")
+                Notification.requestPermission();
+        });
+
+
+    function notifyMe() {
+        Push.create("Hello world!", {
+            body: "How's it hangin'?",
+            vibrate: [200, 100],
+            timeout: 4000,
+            onClick: function() {
+                window.focus();
+                this.close();
+            }
+        });
+    }
+</script>
+

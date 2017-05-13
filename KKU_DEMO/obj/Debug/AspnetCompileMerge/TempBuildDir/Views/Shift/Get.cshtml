@@ -1,0 +1,95 @@
+﻿@using System.Web.Mvc.Html
+@using KKU_DEMO.App_Start
+@using KKU_DEMO.Models.AuthModels
+@model KKU_DEMO.Models.ViewModels.ShiftSearchModel
+
+<head>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/InfoPopUp.js"></script>
+
+
+    <link rel="stylesheet" href="~/Content/bootstrap-select.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-select.min.css">
+
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+    
+</head>
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2>Информация о смене:</h2>
+            </div>
+            <div class="modal-body">
+                <div id="Details"> <img id="pic" src="~/Content/Image/spinner.gif" width="100%" /></div>
+            </div>
+            <div class="modal-footer">
+               
+                <button id ="modalClose" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    
+.numberlist {
+    width: 100% !important;
+}
+     
+</style>
+
+
+<h3>Поиск смен</h3>
+@using (Ajax.BeginForm("GetShifts", "Shift", new AjaxOptions {HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "shifts" }))
+{
+    <div style="display: inline-block">
+        @Html.LabelFor(model => model.Factory.Name, new {@class = "control-label", @align = "center"})
+
+    </div>
+    <div style="display: inline-block">
+        @Html.DropDownListFor(model => model.FactoryId, Model.FactoryList, new {@class = "selectpicker", @id = "FactoryId"})
+    </div>
+    <div style="display: inline-block">
+        @Html.LabelFor(model => model.Date)
+    </div>
+    <div style="display: inline-block">
+        <input class="form-control text-box single-line" id="Date" name="Date" type="date" value="">
+    </div>
+    <div style="display: inline-block">
+        @Html.LabelFor(model => model.Number, new {@class = "control-label", @align = "center"})
+    </div>
+    <div style="display: inline-block">
+        @Html.DropDownListFor(model => model.Number, Model.NumberList, new {@class = "selectpicker numberlist", @id = "Number"})
+    </div>
+    <div style="display: inline-block">
+        @Html.LabelFor(model => model.UserId, new {@class = "control-label", @align = "center"})
+
+    </div>
+    <div style="display: inline-block">
+        @Html.DropDownListFor(model => model.UserId, Model.MasterList, new {@class = "selectpicker", @id = "UserId"})
+    </div>
+    <div style="display: inline-block">
+        <input type="submit" value="Выбрать" id="Button" class="btn btn-info"/>
+    </div>
+}
+<br />
+
+
+<div id="shifts">
+    
+</div>
+
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")

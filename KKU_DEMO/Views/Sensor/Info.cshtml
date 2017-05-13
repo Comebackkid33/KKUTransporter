@@ -1,0 +1,75 @@
+﻿@using KKU_DEMO.App_Start
+@using KKU_DEMO.Helpers
+@model KKU_DEMO.Models.Sensor
+@{
+    Layout = null;
+}
+
+<head>
+    
+   
+
+</head>
+
+
+<div>
+
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Factory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Factory.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Token)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Token)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurWeight) кг
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalWeight)
+        </dt>
+
+        <dd>
+            @($"{Model.TotalWeight:0.###}") т
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DownTime)
+        </dt>
+
+        <dd>
+            @($"{Model.DownTime/3600}") ч. @($"{(Model.DownTime%3600)/60}") мин. @($"{Model.DownTime%60}") сек.
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.Translate(Model.State)
+            
+        </dd>
+        
+    </dl>
+    @Html.ActionLink("Скачть лог", "Download", "Sensor", new { id = Model.Id }, new { @class = "btn btn-info", @style = "float: right; margin: 0 10px; display: inline-block;" })
+    
+</div>

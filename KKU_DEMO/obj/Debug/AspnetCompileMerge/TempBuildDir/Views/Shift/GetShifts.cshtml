@@ -1,0 +1,78 @@
+﻿@using System.Activities.Statements
+@using KKU_DEMO.App_Start
+@using KKU_DEMO.Helpers
+
+@model IEnumerable<KKU_DEMO.Models.Shift>
+
+
+
+<!DOCTYPE html>
+
+
+<table class="table" style="margin-top: 20px;" id="shifts">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Factory.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalShiftWeight)
+        </th>
+        <th>
+         
+        </th>
+    </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.State == "INPROCESS" ? "success" :( item.State == "CLOSED" ? "active": "warning"))">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Factory.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.GetName(item.UserId)
+                </td>
+                <td>
+                  @Html.Translate(item.State) 
+                </td>
+                <td>
+
+                    @{
+                        if (item.StateEnum == StateEnum.ASSIGNED)
+                        {
+                            <i>Нет данных</i>
+                        }
+                        else
+                        {
+                            <b> @($"{item.TotalShiftWeight:0.##}") т</b>
+
+                        }
+                    }
+                </td>
+
+                <td>
+
+                    <button type="button" id="ModalButton" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" style="float: left; margin: 0 10px;" onclick="info('@item.Id', '@Strings.HostUrl/Shift/Info/')">Детали</button>
+
+                </td>
+
+            </tr>
+        }
+</table>

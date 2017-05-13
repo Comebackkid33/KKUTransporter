@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKU_DEMO", "KKU_DEMO\KKU_DEMO.csproj", "{FE14DE8B-09F7-449A-A181-DCF5613CED1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKU_COM", "KKU_COM\KKU_COM.csproj", "{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftChanger", "ShiftChanger\ShiftChanger.csproj", "{44E9F770-801E-42FB-8CCB-5E210A1C11F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSensor", "TestSensor\TestSensor.csproj", "{8A45B6FD-8A21-425F-A875-0592C5F137D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE14DE8B-09F7-449A-A181-DCF5613CED1F}.Release|x86.Build.0 = Release|Any CPU
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Debug|x86.ActiveCfg = Debug|x86
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Debug|x86.Build.0 = Debug|x86
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Release|x86.ActiveCfg = Release|x86
+		{CFA781B1-1E76-4E29-BA9F-3948ACD771A6}.Release|x86.Build.0 = Release|x86
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Debug|x86.Build.0 = Debug|Any CPU
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{44E9F770-801E-42FB-8CCB-5E210A1C11F6}.Release|x86.Build.0 = Release|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A45B6FD-8A21-425F-A875-0592C5F137D2}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,92 @@
+﻿@using KKU_DEMO.App_Start
+@using KKU_DEMO.Helpers
+@using KKU_DEMO.Models.AuthModels
+@model KKU_DEMO.Models.Shift
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<div >
+
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Factory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Factory.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.GetName(Model.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.Translate(Model.State)
+        </dd>
+        @if (Model.State != "ASSIGNED")
+        {
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalShiftWeight)
+            </dt>
+
+            <dd>
+                <b> @($"{Model.TotalShiftWeight:0.##}") т</b>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DownTime)
+            </dt>
+
+            <dd>
+                @($"{Model.DownTime/3600}") ч. @($"{(Model.DownTime%3600)/60}") мин. @($"{Model.DownTime%60}") сек.
+
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductionPct)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductionPct) %
+            </dd>
+        }
+        else
+        {
+            <dd>
+                <i> Нет данных о показателях смены, дождитесь ее окончания</i>
+            </dd>
+        }
+    </dl>
+    @if (User.Identity.IsInRole("SuperAdmin"))
+    {
+
+        <button type="button" id="ModalButton" class="btn btn-danger" data-target="#myModal" style="float: right; margin: 0 10px; display: inline-block;" onclick="confirm('Вы уверены?'); info('@Model.Id', '@Strings.HostUrl/Shift/Delete/')">Удалить</button>
+        <button type="button" id="ModalButton" class="btn btn-info"  style="float: right; margin: 0 10px; display: inline-block;" onclick="edit('@Model.Id', '@Strings.HostUrl/Shift/Edit/')">Изменить</button>
+
+    }
+</div>

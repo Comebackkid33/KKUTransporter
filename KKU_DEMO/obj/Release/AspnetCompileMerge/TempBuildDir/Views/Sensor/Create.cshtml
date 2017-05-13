@@ -1,0 +1,84 @@
+﻿
+
+@using KKU_DEMO.App_Start
+@model KKU_DEMO.Models.Sensor
+
+
+<head>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+</head>
+@{
+    List<SelectListItem> FactoryList = new List<SelectListItem>();
+    foreach (var i in ViewBag.FactoryList)
+
+    {
+        FactoryList.Add(new SelectListItem() { Text = i.Name.ToString(), Value = i.Id.ToString() });
+    }
+}
+
+<h2>Добавить новый датчик</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-2", @align = "center"})
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Factory.Name, htmlAttributes: new { @class = "control-label col-md-2", @align = "center" })
+
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.FactoryId, FactoryList)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Token, htmlAttributes: new {@class = "control-label col-md-2", @align = "center"})
+            <div class="col-md-4">
+                <input id="jsIdResult" name="Token" type="text" placeholder="Results will be placed here..." readonly size="40" class="form-control text-box single-line"/>
+
+                @Html.ValidationMessageFor(model => model.Token, "", new {@class = "text-danger"})
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Сгенерировать" id="jsGenId" class="btn btn-primary" onclick="runGuid"/>
+                <input type="submit" value="Добавить" name="Create" class="btn btn-success"/>
+            </div>
+        </div>
+
+
+    </div>
+    <script language="javascript">
+                    function guid() {
+                        return s4() + s4() + '-' + s4() + '-' + s4();
+                    }
+
+                    function s4() {
+                        return Math.floor((1 + Math.random()) * 0x10000)
+                            .toString(16)
+                            .substring(1);
+                    }
+
+                    document.getElementById('jsGenId').addEventListener('click', function () {
+                        document.getElementById('jsIdResult').value = guid();
+                    });
+    </script>
+
+}
+
+
+
+

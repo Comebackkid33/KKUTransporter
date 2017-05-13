@@ -1,0 +1,65 @@
+﻿@using KKU_DEMO.Helpers
+@model KKU_DEMO.Models.ViewModels.ShiftCreateModel
+
+
+<head>
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/InfoPopUp.js"></script>
+
+
+
+    <link rel="stylesheet" href="~/Content/bootstrap-select.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-select.min.css">
+ 
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+</head>
+
+
+@using (Html.BeginForm("Create", "Shift", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <div style="margin: auto; top: 0; right: 0;bottom: 0;left: 0; width: 300px;" id="Form">
+        <h2>Создать смену</h2>
+
+        @Html.ValidationSummary(false)
+      
+        <div class="form-group">
+            <b>Завод:</b>
+            <div>
+                @Html.DropDownListFor(model => model.FactoryId, Model.FactoryList, new {@class = "selectpicker"})
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <b>Номер смены:</b>
+            <div>
+                @Html.DropDownListFor(model => model.Number, Model.NumberList, new {@class = "selectpicker"})
+            </div>
+        </div>
+        <div class="form-group">
+            <b>Мастер Смены:</b>
+            <div>
+                @Html.DropDownListFor(model => model.UserId, Model.MasterList, new {@class = "selectpicker"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <b>Дата:</b>
+            <div>
+                @Html.EditorFor(model => model.Date, new {htmlAttributes = new {@class = "form-control", @style = "max-width: 220px;"}})
+            </div>
+        </div>
+
+        <div class="form-group" style="display: inline-block;  padding-left: 70px;">
+            <div>
+                <input type="submit" value="Создать" class="btn btn-success"/>
+            </div>
+        </div>
+    </div>
+}
+

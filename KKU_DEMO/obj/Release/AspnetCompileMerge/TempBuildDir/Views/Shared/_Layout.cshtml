@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity;
+@using KKU_DEMO.App_Start
+@using KKU_DEMO.Managers
+@using KKU_DEMO.Models.AuthModels
+@using Microsoft.AspNet.Identity.Owin
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title KKU Transporter</title>
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico"/>
+    <link href="~/Content/signin.css" rel="stylesheet" type="text/css"/>
+    <script src="~/Scripts/Clock.js"></script>
+    
+  
+
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                   
+            </button>
+            @Html.ActionLink("KKU Transporter", "About", "Home", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse " id="navbarCollapse">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown" title="Sensor">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Считывающие устройства <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @if (User.Identity.IsInRole( "SuperAdmin"))
+                        {
+                            <li>@Html.ActionLink("Добавить датчик", "Create", "Sensor")</li>
+                        }
+                        <li>@Html.ActionLink("Текущие показания", "Index", "Sensor")</li>
+                        
+                         
+                    </ul>
+                </li>
+                @if (User.Identity.IsInAnyRoles("SuperAdmin","Director"))
+                { 
+                    <li class="dropdown" title="Account">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Пользователи <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                                
+                            @if (User.Identity.IsInAnyRoles("SuperAdmin"))
+                            {
+                                <li>@Html.ActionLink("Добавить пользователя", "Register", "Account")</li>
+                            }
+                            <li>@Html.ActionLink("Все пользователи", "Users", "Account")</li>
+                            
+                           @* <li role="separator" class="divider"></li>*@
+                             
+                        </ul>
+                    </li>
+                }
+                @if (User.Identity.IsInAnyRoles("SuperAdmin", "Director"))
+                {
+                    <li class="dropdown" title="Shift">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Смены<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+
+                            @if (User.Identity.IsInAnyRoles("SuperAdmin"))
+                            {
+                                <li>@Html.ActionLink("Создать смену", "Create", "Shift")</li>
+                            }
+
+                            <li>@Html.ActionLink("Выбрать смену", "Get", "Shift")</li>
+
+                        </ul>
+                    </li>
+                }
+                @if (User.Identity.IsInAnyRoles("SuperAdmin", "Director"))
+                {
+                    <li class="dropdown" title="Incident">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Инциденты<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+
+                            <li>@Html.ActionLink("Все инциденты", "Index", "Incident")</li>
+
+                        </ul>
+                    </li>
+                }
+                @if (User.Identity.IsInAnyRoles("SuperAdmin", "Director"))
+                {
+                    <li class="dropdown" title="Stat">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статистика<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("За день", "ByDay", "Stat")</li>
+                            <li>@Html.ActionLink("За период", "ByPeriod", "Stat")</li>
+                            <li><a href="#">По смене</a></li>
+                            <li><a href="#">По цеху</a></li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li  style="color: white; vertical-align: middle; padding: 5% 0;  margin: 0 10px;">Здравствуйте,@User.Identity.GetName() </li>
+                @Html.ActionLink(" ", "LogOut", "Account", null, new {@class = "navbar-btn btn btn-danger glyphicon glyphicon-off " })
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<div class="container body-content">
+    @{ Html.RenderPartial("_Alerts"); }
+    @RenderBody()
+
+    <footer>
+
+        <div class="navbar-fixed-bottom row-fluid navbar-inverse">
+            <div class="navbar-inner">
+                <div id="timedisplay" align="right" style="color: #999999; font-size: large"></div>
+            </div>
+        </div>
+
+
+    </footer>
+</div>
+
+
+
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+
+    <script >
+        $(function () {
+            var loc = window.location.href;
+            $(".navbar .navbar-nav > li").each(function () {
+                if (loc.match('/'+this.title)) { 
+                    $(this).addClass("active");
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>

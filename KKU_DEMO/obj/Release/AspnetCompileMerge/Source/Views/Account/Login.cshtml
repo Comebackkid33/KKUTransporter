@@ -1,0 +1,43 @@
+﻿
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "_LogInLayout.cshtml";
+}
+
+@model KKU_DEMO.Models.AuthModels.LoginViewModel
+
+<head>
+    <link href="~/Content/signin.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript">
+         $(document).ready(function() {
+            $('a:contains("Web hosting by Somee.com")').replaceWith("");;
+         });
+    </script>
+
+</head>
+
+<h2></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-signin">
+        @Html.ValidationSummary()
+        <h2 class="form-signin-heading"> Вход в систему</h2>
+        
+            <label for="username" class="sr-only">Логин:</label><br/>
+            @Html.EditorFor(x => x.UserName, new{ htmlAttributes = new {@class = "form-control", @id = "username",  @placeholder = "Логин" }})
+            @Html.EditorFor(x => x.Password, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Пароль" } } )
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
+        
+
+        
+    </div>
+}
+

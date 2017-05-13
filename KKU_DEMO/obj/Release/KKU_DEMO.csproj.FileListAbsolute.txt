@@ -1,0 +1,296 @@
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ApplicationInsights.config
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\csc.exe
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\vbc.exe
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\VBCSCompiler.exe
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\KKU_DEMO.dll.config
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\KKU_DEMO.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\KKU_DEMO.pdb
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Antlr3.Runtime.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\EntityFramework.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\EntityFramework.SqlServer.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.Web.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Newtonsoft.Json.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Net.Http.Formatting.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Helpers.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Http.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Http.WebHost.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Mvc.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Optimization.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Razor.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.WebPages.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.WebPages.Razor.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\WebGrease.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\EntityFramework.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\EntityFramework.SqlServer.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.Web.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Helpers.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Mvc.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Optimization.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Razor.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.WebPages.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.WebPages.Razor.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Antlr3.Runtime.pdb
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Newtonsoft.Json.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Net.Http.Formatting.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Http.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\System.Web.Http.WebHost.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.Helpers.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.Mvc.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.Optimization.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.Razor.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.WebPages.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.WebPages.Razor.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Net.Http.Formatting.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.Http.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\ru\System.Web.Http.WebHost.resources.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\obj\Release\KKU_DEMO.csprojResolveAssemblyReference.cache
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\obj\Release\KKU_DEMO.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\obj\Release\KKU_DEMO.pdb
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Security.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Owin.dll
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Security.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\obj\Release\KKU_DEMO.csproj.GenerateResource.Cache
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\obj\Release\KKU_DEMO.Migrations.dfmdfoiad.resources
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\obj\Release\KKU_DEMO.Migrations.newbase.resources
+C:\Users\Kostya\documents\visual studio 2015\Projects\KKU_DEMO\KKU_DEMO\obj\Release\KKU_DEMO.Migrations.dssdsad.resources
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ApplicationInsights.config
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\csc.exe
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\vbc.exe
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\VBCSCompiler.exe
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\KKU_DEMO.dll.config
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\KKU_DEMO.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\KKU_DEMO.pdb
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Antlr3.Runtime.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\EntityFramework.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\EntityFramework.SqlServer.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.Web.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Newtonsoft.Json.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Owin.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Net.Http.Formatting.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Helpers.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Http.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Http.WebHost.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Mvc.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Optimization.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Razor.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.WebPages.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.WebPages.Razor.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\WebGrease.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\EntityFramework.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\EntityFramework.SqlServer.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.Web.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Newtonsoft.Json.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Helpers.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Mvc.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Optimization.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Razor.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.WebPages.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.WebPages.Razor.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Antlr3.Runtime.pdb
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Net.Http.Formatting.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Http.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\System.Web.Http.WebHost.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.Helpers.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.Mvc.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.Optimization.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.Razor.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.WebPages.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.WebPages.Razor.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Net.Http.Formatting.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.Http.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\ru\System.Web.Http.WebHost.resources.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Release\KKU_DEMO.csprojResolveAssemblyReference.cache
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Release\KKU_DEMO.csproj.GenerateResource.Cache
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Release\KKU_DEMO.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Release\KKU_DEMO.pdb
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\BigMath.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Ionic.Zip.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Ionic.ZLib.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Telegram.Bot.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\TeleSharp.TL.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\TLSharp.Core.dll
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Ionic.Zip.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\bin\Telegram.Bot.xml
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Release\KKU_DEMO.Migrations.deploy.resources
+C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Release\KKU_DEMO.Migrations.efsdfsdf.resources
+d:\KKU\KKU_DEMO\bin\ApplicationInsights.config
+d:\KKU\KKU_DEMO\bin\roslyn\csc.exe
+d:\KKU\KKU_DEMO\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+d:\KKU\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+d:\KKU\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.dll
+d:\KKU\KKU_DEMO\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+d:\KKU\KKU_DEMO\bin\roslyn\Microsoft.CSharp.Core.targets
+d:\KKU\KKU_DEMO\bin\roslyn\Microsoft.VisualBasic.Core.targets
+d:\KKU\KKU_DEMO\bin\roslyn\System.Collections.Immutable.dll
+d:\KKU\KKU_DEMO\bin\roslyn\System.Reflection.Metadata.dll
+d:\KKU\KKU_DEMO\bin\roslyn\vbc.exe
+d:\KKU\KKU_DEMO\bin\roslyn\VBCSCompiler.exe
+d:\KKU\KKU_DEMO\bin\roslyn\VBCSCompiler.exe.config
+d:\KKU\KKU_DEMO\bin\KKU_DEMO.dll.config
+d:\KKU\KKU_DEMO\bin\KKU_DEMO.dll
+d:\KKU\KKU_DEMO\bin\KKU_DEMO.pdb
+d:\KKU\KKU_DEMO\bin\Antlr3.Runtime.dll
+d:\KKU\KKU_DEMO\bin\BigMath.dll
+d:\KKU\KKU_DEMO\bin\EntityFramework.dll
+d:\KKU\KKU_DEMO\bin\EntityFramework.SqlServer.dll
+d:\KKU\KKU_DEMO\bin\Ionic.Zip.dll
+d:\KKU\KKU_DEMO\bin\Ionic.ZLib.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.Agent.Intercept.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.DependencyCollector.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.PerfCounterCollector.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.ServerTelemetryChannel.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.Web.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.WindowsServer.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.ApplicationInsights.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Core.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Owin.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Host.SystemWeb.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.Cookies.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.OAuth.dll
+d:\KKU\KKU_DEMO\bin\Microsoft.Web.Infrastructure.dll
+d:\KKU\KKU_DEMO\bin\Newtonsoft.Json.dll
+d:\KKU\KKU_DEMO\bin\Owin.dll
+d:\KKU\KKU_DEMO\bin\System.Net.Http.Formatting.dll
+d:\KKU\KKU_DEMO\bin\System.Web.Helpers.dll
+d:\KKU\KKU_DEMO\bin\System.Web.Http.dll
+d:\KKU\KKU_DEMO\bin\System.Web.Http.WebHost.dll
+d:\KKU\KKU_DEMO\bin\System.Web.Mvc.dll
+d:\KKU\KKU_DEMO\bin\System.Web.Optimization.dll
+d:\KKU\KKU_DEMO\bin\System.Web.Razor.dll
+d:\KKU\KKU_DEMO\bin\System.Web.WebPages.Deployment.dll
+d:\KKU\KKU_DEMO\bin\System.Web.WebPages.dll
+d:\KKU\KKU_DEMO\bin\System.Web.WebPages.Razor.dll
+d:\KKU\KKU_DEMO\bin\Telegram.Bot.dll
+d:\KKU\KKU_DEMO\bin\TeleSharp.TL.dll
+d:\KKU\KKU_DEMO\bin\TLSharp.Core.dll
+d:\KKU\KKU_DEMO\bin\WebGrease.dll
+d:\KKU\KKU_DEMO\bin\EntityFramework.xml
+d:\KKU\KKU_DEMO\bin\EntityFramework.SqlServer.xml
+d:\KKU\KKU_DEMO\bin\Ionic.Zip.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.DependencyCollector.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.ServerTelemetryChannel.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.Web.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.AI.WindowsServer.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.ApplicationInsights.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Core.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.AspNet.Identity.Owin.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Host.SystemWeb.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.Cookies.xml
+d:\KKU\KKU_DEMO\bin\Microsoft.Owin.Security.OAuth.xml
+d:\KKU\KKU_DEMO\bin\Newtonsoft.Json.xml
+d:\KKU\KKU_DEMO\bin\System.Web.Helpers.xml
+d:\KKU\KKU_DEMO\bin\System.Web.Mvc.xml
+d:\KKU\KKU_DEMO\bin\System.Web.Optimization.xml
+d:\KKU\KKU_DEMO\bin\System.Web.Razor.xml
+d:\KKU\KKU_DEMO\bin\System.Web.WebPages.xml
+d:\KKU\KKU_DEMO\bin\System.Web.WebPages.Deployment.xml
+d:\KKU\KKU_DEMO\bin\System.Web.WebPages.Razor.xml
+d:\KKU\KKU_DEMO\bin\Telegram.Bot.xml
+d:\KKU\KKU_DEMO\bin\Antlr3.Runtime.pdb
+d:\KKU\KKU_DEMO\bin\System.Net.Http.Formatting.xml
+d:\KKU\KKU_DEMO\bin\System.Web.Http.xml
+d:\KKU\KKU_DEMO\bin\System.Web.Http.WebHost.xml
+d:\KKU\KKU_DEMO\bin\ru\System.Web.Helpers.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.Mvc.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.Optimization.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.Razor.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.WebPages.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.WebPages.Deployment.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.WebPages.Razor.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Net.Http.Formatting.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.Http.resources.dll
+d:\KKU\KKU_DEMO\bin\ru\System.Web.Http.WebHost.resources.dll
+d:\KKU\KKU_DEMO\obj\Release\KKU_DEMO.csprojResolveAssemblyReference.cache
+d:\KKU\KKU_DEMO\obj\Release\KKU_DEMO.Migrations.deploy.resources
+d:\KKU\KKU_DEMO\obj\Release\KKU_DEMO.Migrations.efsdfsdf.resources
+d:\KKU\KKU_DEMO\obj\Release\KKU_DEMO.csproj.GenerateResource.Cache
+d:\KKU\KKU_DEMO\obj\Release\KKU_DEMO.dll
+d:\KKU\KKU_DEMO\obj\Release\KKU_DEMO.pdb

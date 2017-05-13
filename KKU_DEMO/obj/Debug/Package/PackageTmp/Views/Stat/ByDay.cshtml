@@ -1,0 +1,42 @@
+﻿@using KKU_DEMO.App_Start
+@model dynamic
+
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/InfoPopUp.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+
+</head>
+
+
+
+<h3> Укажите день:</h3>
+
+<div style="display:inline-block">
+    <input class="form-control text-box single-line" id="Date" name="Date" type="date" value="">
+</div>
+<div style="display:inline-block">
+    <input type="button" value="Выбрать" id="Button" class="btn btn-info" />
+</div>
+<br />
+
+<script>
+    $(document).ready(function() {
+        $("#Button").click(function () {
+            $.ajax({
+                url: "@Strings.HostUrl/Stat/GetByDay/" + $("#Date").val(),
+                cache: false,
+                success: function(html) {
+                    $("#stats").html(html);
+                }
+            });
+        });
+    })
+
+
+
+</script>
+<div id="stats">
+
+</div>
