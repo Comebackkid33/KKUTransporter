@@ -29,6 +29,10 @@ namespace KKU_DEMO.Managers
         {
             return db.Sensor.Find(id);
         }
+        public Sensor GetByFactoryId(int id,string name)
+        {
+            return  db.Sensor.FirstOrDefault(s => s.FactoryId == id && s.Name == name);
+        }
 
         public void Create (Sensor sensor)
         {
@@ -36,6 +40,7 @@ namespace KKU_DEMO.Managers
             db.Entry(sensor).State = EntityState.Added;
             db.SaveChanges();
         }
+
 
 
         public string[] HexToString(string s)

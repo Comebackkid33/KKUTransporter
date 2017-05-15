@@ -14,69 +14,39 @@ using KKU_DEMO.Managers;
 using KKU_DEMO.Models;
 using Newtonsoft.Json;
 
+
 namespace KKU_DEMO.Controllers
 {
     public class WeightApiController : ApiController
     {
         private IncidentManager IncidentManager;
         private SensorManager SensorManager;
+        private ShiftManager ShiftManager;
+       
 
         public WeightApiController() : base()
         {
             IncidentManager = new IncidentManager();
             SensorManager = new SensorManager();
+            ShiftManager = new ShiftManager();
         }
         //Переключение смен
         public HttpResponseMessage Get(int id)
         {
-            KKUContext db = new KKUContext();
-
-            var sh = db.Shift.Where(s => s.Factory.Id == id).ToList();
-            var shifts = sh.OrderBy(x => x.Date).ThenBy(x => x.Number).ToList();
-
-
-            var total = db.Sensor.FirstOrDefault(s => s.FactoryId == id && s.Name == "ВХОД");
-            bool flag = false;
-
-            if (shifts != null && total != null)
+            try
             {
-                for (int i = 0; i < shifts.Count() - 1; i++)
-
-                {
-                    if (shifts[i].StateEnum == StateEnum.INPROCESS)
-                    {
-                        shifts[i].StateEnum = StateEnum.CLOSED;
-                        shifts[i].TotalShiftWeight = total.TotalWeight - shifts[i].TotalShiftWeight;
-                        flag = true;
-                        if (shifts[i + 1].Date == shifts[i].Date && shifts[i + 1].Number == shifts[i].Number + 1 ||
-                            shifts[i].Date.AddDays(1) == shifts[i + 1].Date && shifts[i + 1].Number == 1)
-                        {
-                            shifts[i + 1].StateEnum = StateEnum.INPROCESS;
-                            shifts[i + 1].TotalShiftWeight = total.TotalWeight;
-                        }
-
-                        break;
-                    }
-                }
-                if (flag == false)
-                {
-                    for (int i = 0; i < shifts.Count() - 1; i++)
-
-                    {
-                        if (shifts[i].StateEnum == StateEnum.ASSIGNED)
-                        {
-                            shifts[i].StateEnum = StateEnum.INPROCESS;
-                            shifts[i].TotalShiftWeight = total.TotalWeight;
-                            break;
-                        }
-                    }
-                }
-                db.SaveChanges();
-
-
+                this.ShiftManager.ChangeShift(id);
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
-            return new HttpResponseMessage(HttpStatusCode.NotFound);
+            catch (Exception e)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                response.Content = new StringContent("Cant find free shifts in requested factory");
+                return response;
+            }
+               
+            
+            
         }
 
         //Считывание показаний 

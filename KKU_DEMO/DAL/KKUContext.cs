@@ -13,7 +13,7 @@ namespace KKU_DEMO.DAL
     public class KKUContext:  IdentityDbContext<User>
 
     {
-        public KKUContext() : base("u0302353_KovrovKU")
+        public KKUContext() : base("u0302353_KovrovKU_Test")
         {
             this.Configuration.LazyLoadingEnabled = true;
         }

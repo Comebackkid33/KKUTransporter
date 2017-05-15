@@ -20,6 +20,7 @@ namespace KKU_DEMO.Managers
         private RoleManager<IdentityRole> RoleManager;
         private UserManager UserManager;
         private FactoryManager FactoryManager;
+        private SensorManager SensorManager;
 
         public ShiftManager(HttpContextBase httpContext)
         {
@@ -28,8 +29,18 @@ namespace KKU_DEMO.Managers
             RoleManager =  new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             UserManager = new UserManager(new UserStore<User>(db));
             FactoryManager = new FactoryManager();
+            SensorManager = new SensorManager();
+
+        }
+        public ShiftManager()
+        {
+            db = new KKUContext();
 
             
+            FactoryManager = new FactoryManager();
+            SensorManager = new SensorManager();
+
+
         }
 
         public List<Shift> GetAll(int id)
@@ -92,6 +103,13 @@ namespace KKU_DEMO.Managers
             return shift;
         }
 
+        public List<Shift> GetByFactoryId(int id)
+        {
+            
+            var sh = db.Shift.Where(s => s.Factory.Id == id).ToList();
+            var shifts = sh.OrderBy(x => x.Date).ThenBy(x => x.Number).ToList();
+            return shifts;
+        }
         public void Create(Shift entity)
         {
             throw new NotImplementedException();
@@ -150,8 +168,12 @@ namespace KKU_DEMO.Managers
         public void Update(ShiftCreateModel shiftCreateModel)
         {
             Shift shift = db.Shift.Find(shiftCreateModel.Id);
-
+            shift.Date = shiftCreateModel.Date;
+            shift.Number = shiftCreateModel.Number;
+            shift.State = shiftCreateModel.State;
+            shift.FactoryId = shiftCreateModel.FactoryId;
             shift.Factory = db.Factory.Where(b => b.Id == shift.FactoryId).Select(b => b).FirstOrDefault();
+            shift.UserId = shiftCreateModel.UserId;
             shift.User = UserManager.FindById(shift.UserId);
             shift.DownTime = shiftCreateModel.DownTime;
             shift.ProductionPct = shiftCreateModel.ProductionPct;
@@ -177,6 +199,55 @@ namespace KKU_DEMO.Managers
             {
                 return shift.TotalShiftWeight;
             }
+        }
+
+        public void ChangeShift(int id)
+        {
+            var shifts = GetByFactoryId(id);
+            var total = SensorManager.GetByFactoryId(id, "ВХОД");
+            bool flag = false;
+
+            if (shifts != null && total != null)
+            {
+                for (int i = 0; i < shifts.Count() - 1; i++)
+
+                {
+                    if (shifts[i].StateEnum == StateEnum.INPROCESS)
+                    {
+                        shifts[i].StateEnum = StateEnum.CLOSED;
+                        shifts[i].TotalShiftWeight = total.TotalWeight - shifts[i].TotalShiftWeight;
+                        flag = true;
+                        if (shifts[i + 1].Date == shifts[i].Date && shifts[i + 1].Number == shifts[i].Number + 1 ||
+                            shifts[i].Date.AddDays(1) == shifts[i + 1].Date && shifts[i + 1].Number == 1)
+                        {
+                            shifts[i + 1].StateEnum = StateEnum.INPROCESS;
+                            shifts[i + 1].TotalShiftWeight = total.TotalWeight;
+                        }
+
+                        break;
+                    }
+                }
+                if (flag == false)
+                {
+                    for (int i = 0; i < shifts.Count() - 1; i++)
+
+                    {
+                        if (shifts[i].StateEnum == StateEnum.ASSIGNED)
+                        {
+                            shifts[i].StateEnum = StateEnum.INPROCESS;
+                            shifts[i].TotalShiftWeight = total.TotalWeight;
+                            break;
+                        }
+                    }
+                }
+                db.SaveChanges();
+
+            }
+            else
+            {
+                throw new Exception("Ошибка поиска смены или датчика");
+            }
+            
         }
     }
 }
