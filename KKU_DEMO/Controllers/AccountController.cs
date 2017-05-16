@@ -68,7 +68,7 @@ namespace KKU_DEMO.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.returnUrl = returnUrl;
-            return View();
+            return View("Login");
         }
 
 

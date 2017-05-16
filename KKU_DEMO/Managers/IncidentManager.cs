@@ -32,11 +32,16 @@ namespace KKU_DEMO.Managers
           
             return db.Incident.Where(u => u.Shift.UserId == id).OrderBy(u => u.Time).ToList();
         }
-
+        /// <summary>
+        /// Возвращает открытый инцидент в выбранную смену на выбранном датчике
+        /// </summary>
+        /// <param name="shiftId"></param>
+        /// <param name="sensorId"></param>
+        /// <returns></returns>
         public Incident GetIncident(int shiftId, int sensorId)
         {
             
-            return db.Incident.FirstOrDefault(u => u.ShiftId == shiftId && u.SensorId == sensorId);
+            return db.Incident.FirstOrDefault(u => u.ShiftId == shiftId && u.SensorId == sensorId && u.State == StateEnum.OPENED.ToString());
         }
         public Incident GetIncident(int id)
         {

@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace KKU_DEMO.Managers
 {
-    public class ShiftManager 
+    public class ShiftManager:IManager<Shift>
     {
         private KKUContext db;
         private RoleManager<IdentityRole> RoleManager;
@@ -42,11 +42,26 @@ namespace KKU_DEMO.Managers
 
 
         }
+        public ShiftManager(SensorManager sensorManager)
+        {
+            db = new KKUContext();
+
+
+            FactoryManager = new FactoryManager();
+            SensorManager = sensorManager;
+
+
+        }
 
         public List<Shift> GetAll(int id)
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Возвращает список смен, попараметрам поиска
+        /// </summary>
+        /// <param name="shiftSearchModel">Модель поиска смены</param>
+        /// <returns></returns>
         public List<Shift> GetShifts(ShiftSearchModel shiftSearchModel)
         {
             List<Shift> shifts = new List<Shift>();
@@ -81,13 +96,18 @@ namespace KKU_DEMO.Managers
             {
                 if (sh.StateEnum == StateEnum.INPROCESS)
                 {
-                    sh.TotalShiftWeight = getTotalWeight(sh);
+                    sh.TotalShiftWeight = GetTotalWeight(sh);
                 }
             }
 
             return shifts.OrderBy(x => x.Date).ThenBy(x => x.FactoryId).ThenBy(x => x.Number).ToList();
         }
-        
+
+        public List<Shift> GetAll()
+        {
+            return db.Shift.ToList();
+        }
+
         public Shift GetById(int id)
         {
             var shift = db.Shift.Find(id);
@@ -95,22 +115,44 @@ namespace KKU_DEMO.Managers
             {
                 if (shift.StateEnum == StateEnum.INPROCESS)
                 {
-                    shift.TotalShiftWeight = getTotalWeight(shift);
+                    shift.TotalShiftWeight = GetTotalWeight(shift);
+                    shift.ProductionPct = ProductionPct(shift);
 
                 }
                 
             }
             return shift;
         }
-
-        public List<Shift> GetByFactoryId(int id)
+        /// <summary>
+        /// Возвращает все смены подразделения (определенного состояния)
+        /// </summary>
+        /// <param name="id">ID подразделения</param>
+        /// <param name="state">Состояние смены</param>
+        /// <returns></returns>
+        public List<Shift> GetByFactoryId(int? id, string state=null)
         {
+            var query = db.Shift.AsQueryable();
+            query = db.Shift.Where(s => s.Factory.Id == id);
+
+            if (state != null)
+            {
+                query = db.Shift.Where(s => s.State == state);
+            }
             
-            var sh = db.Shift.Where(s => s.Factory.Id == id).ToList();
-            var shifts = sh.OrderBy(x => x.Date).ThenBy(x => x.Number).ToList();
+            var shifts = query.OrderBy(x => x.Date).ThenBy(x => x.Number).ToList();
             return shifts;
         }
         public void Create(Shift entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Shift entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Shift entity)
         {
             throw new NotImplementedException();
         }
@@ -188,9 +230,9 @@ namespace KKU_DEMO.Managers
             return shift == null;
         }
 
-        public double getTotalWeight(Shift shift)
+        public double GetTotalWeight(Shift shift)
         {
-            var totalSensor = db.Sensor.FirstOrDefault(s => s.FactoryId == shift.FactoryId && s.Name == "ВХОД");
+            var totalSensor = SensorManager.GetByFactoryId(shift.FactoryId, "Вход");
             if (totalSensor != null)
             {
                return totalSensor.TotalWeight - shift.TotalShiftWeight;
@@ -200,14 +242,33 @@ namespace KKU_DEMO.Managers
                 return shift.TotalShiftWeight;
             }
         }
-
+        public double ProductionPct(Shift shift)
+        {
+            var wasteSensor = SensorManager.GetByFactoryId(shift.FactoryId,"Отсев");
+            if (wasteSensor != null)
+            {
+                return (1 - (wasteSensor.TotalWeight - shift.ProductionPct)/ shift.TotalShiftWeight) * 100;
+            }
+            else
+            {
+                return shift.TotalShiftWeight;
+            }
+        }
+        /// <summary>
+        /// Переключает смену если есть следующая, если нет, заканчивает текущую смену
+        /// </summary>
+        /// <param name="id">ID подразделения</param>
         public void ChangeShift(int id)
         {
+            //список всех смен на подразделении
             var shifts = GetByFactoryId(id);
-            var total = SensorManager.GetByFactoryId(id, "ВХОД");
+            //входной датчик
+            var totalSensor = SensorManager.GetByFactoryId(id, "Вход");
+            //датчик отсева
+            var wasteSensor = SensorManager.GetByFactoryId(id, "Отсев");
             bool flag = false;
 
-            if (shifts != null && total != null)
+            if (shifts != null && totalSensor != null)
             {
                 for (int i = 0; i < shifts.Count() - 1; i++)
 
@@ -215,13 +276,19 @@ namespace KKU_DEMO.Managers
                     if (shifts[i].StateEnum == StateEnum.INPROCESS)
                     {
                         shifts[i].StateEnum = StateEnum.CLOSED;
-                        shifts[i].TotalShiftWeight = total.TotalWeight - shifts[i].TotalShiftWeight;
+                        shifts[i].TotalShiftWeight = totalSensor.TotalWeight - shifts[i].TotalShiftWeight;
+                        shifts[i].ProductionPct = (1 -
+                                                   (wasteSensor.TotalWeight - shifts[i].ProductionPct)/
+                                                   shifts[i].TotalShiftWeight)*100;
+                 
+
                         flag = true;
                         if (shifts[i + 1].Date == shifts[i].Date && shifts[i + 1].Number == shifts[i].Number + 1 ||
                             shifts[i].Date.AddDays(1) == shifts[i + 1].Date && shifts[i + 1].Number == 1)
                         {
                             shifts[i + 1].StateEnum = StateEnum.INPROCESS;
-                            shifts[i + 1].TotalShiftWeight = total.TotalWeight;
+                            shifts[i + 1].TotalShiftWeight = totalSensor.TotalWeight;
+                            shifts[i + 1].ProductionPct = wasteSensor.TotalWeight;
                         }
 
                         break;
@@ -229,13 +296,14 @@ namespace KKU_DEMO.Managers
                 }
                 if (flag == false)
                 {
-                    for (int i = 0; i < shifts.Count() - 1; i++)
+                    for (int i = 0; i < shifts.Count() ; i++)
 
                     {
                         if (shifts[i].StateEnum == StateEnum.ASSIGNED)
                         {
                             shifts[i].StateEnum = StateEnum.INPROCESS;
-                            shifts[i].TotalShiftWeight = total.TotalWeight;
+                            shifts[i].TotalShiftWeight = totalSensor.TotalWeight;
+                            shifts[i].ProductionPct = wasteSensor.TotalWeight;
                             break;
                         }
                     }

@@ -18,6 +18,7 @@ namespace KKU_DEMO.Models.ViewModels
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Дата:")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         [Required]
@@ -72,6 +73,8 @@ namespace KKU_DEMO.Models.ViewModels
 
         [NotMapped]
         public List<SelectListItem> NumberList { get; set; }
+        [NotMapped]
+        public List<SelectListItem> stateList { get; set; }
 
         public ShiftCreateModel(List<User> masterList, List<Factory> factoryList)
         {
@@ -92,6 +95,11 @@ namespace KKU_DEMO.Models.ViewModels
             {
                 NumberList.Add(new SelectListItem() {Text = i.ToString(), Value = i.ToString()});
             }
+            stateList = new List<SelectListItem>();
+            stateList.Add(new SelectListItem() { Text = "Выполняется", Value = StateEnum.INPROCESS.ToString() });
+            stateList.Add(new SelectListItem() { Text = "Заведена", Value = StateEnum.ASSIGNED.ToString() });
+            stateList.Add(new SelectListItem() { Text = "Закончена", Value = StateEnum.CLOSED.ToString() });
+
         }
 
         public ShiftCreateModel(List<User> masterList, List<Factory> factoryList, Shift shift)
@@ -121,8 +129,13 @@ namespace KKU_DEMO.Models.ViewModels
             StateEnum = StateEnum.ASSIGNED;
             TotalShiftWeight = shift.TotalShiftWeight;
             DownTime = shift.DownTime;
+            State = shift.State;
             ProductionPct = shift.ProductionPct;
 
+            stateList = new List<SelectListItem>();
+            stateList.Add(new SelectListItem() { Text = "Выполняется", Value = StateEnum.INPROCESS.ToString() });
+            stateList.Add(new SelectListItem() { Text = "Заведена", Value = StateEnum.ASSIGNED.ToString() });
+            stateList.Add(new SelectListItem() { Text = "Закончена", Value = StateEnum.CLOSED.ToString() });
 
         }
 

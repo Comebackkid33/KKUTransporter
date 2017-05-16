@@ -7,7 +7,7 @@ using KKU_DEMO.DAL;
 
 namespace KKU_DEMO.Managers
 {
-    interface IManager<T>
+    public interface IManager<T>
     {
         List<T> GetAll();
         T GetById(int id);
