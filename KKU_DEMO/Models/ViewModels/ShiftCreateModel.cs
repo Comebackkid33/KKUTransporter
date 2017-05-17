@@ -95,6 +95,7 @@ namespace KKU_DEMO.Models.ViewModels
             {
                 NumberList.Add(new SelectListItem() {Text = i.ToString(), Value = i.ToString()});
             }
+            Date=DateTime.Now;
             stateList = new List<SelectListItem>();
             stateList.Add(new SelectListItem() { Text = "Выполняется", Value = StateEnum.INPROCESS.ToString() });
             stateList.Add(new SelectListItem() { Text = "Заведена", Value = StateEnum.ASSIGNED.ToString() });

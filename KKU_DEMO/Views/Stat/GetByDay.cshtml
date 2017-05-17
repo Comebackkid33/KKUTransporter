@@ -4,6 +4,44 @@
     Layout = null;
 }
 
+@using Chart.Mvc.ComplexChart;
+@using Chart.Mvc.Extensions
+@{
+    var totalWeightChart = new LineChart();
+    totalWeightChart.ComplexData.Labels.AddRange(Model.DateList.ToArray());
+    totalWeightChart.ComplexData.Datasets.AddRange(new List<ComplexDataset>
+                             {
+                                new ComplexDataset
+                                    {
+                                        Data =Model.TotalWeightList,
+                                        Label = "Общая выработка",
+                                        FillColor = "rgba(151,187,205,0.2)",
+                                        StrokeColor = "rgba(151,187,205,1)",
+                                        PointColor = "rgba(151,187,205,1)",
+                                        PointStrokeColor = "#fff",
+                                        PointHighlightFill = "#fff",
+                                        PointHighlightStroke = "rgba(151,187,205,1)",
+                                    }
+
+                            });
+    var productionChart = new LineChart();
+    productionChart.ComplexData.Labels.AddRange(Model.DateList.ToArray());
+    productionChart.ComplexData.Datasets.AddRange(new List<ComplexDataset>
+                             {
+                                new ComplexDataset
+                                    {
+                                        Data =Model.ProductionPctList,
+                                        Label = "Средний коэффициент выхода ",
+                                        FillColor = "rgba(217,83,79,0.2)",
+                                        StrokeColor = "rgba(217,83,79,1)",
+                                        PointColor = "rgba(217,83,79,1)",
+                                        PointStrokeColor = "#fff",
+                                        PointHighlightFill = "#fff",
+                                        PointHighlightStroke = "rgba(217,83,79,1)",
+                                    }
+
+                            });
+}
 <div>
 
 
@@ -28,15 +66,26 @@
         </dt>
 
         <dd>
-            @($"{Model.DownTime / 3600}") ч. @($"{(Model.DownTime % 3600) / 60}") мин. @($"{Model.DownTime % 60}") сек.
+            @($"{Model.DownTime/3600}") ч. @($"{(Model.DownTime%3600)/60}") мин. @($"{Model.DownTime%60}") сек.
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ProductionPct)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductionPct)%
+            @($"{Model.ProductionPct:0.###}")%
         </dd>
 
     </dl>
+
+  
+    <h3>Общая выработка по дням:</h3>
+    <canvas id="weightChart" width="800" height="400"></canvas>
+    <h3>Средний коэффициент выхода по дням:</h3>
+    <canvas id="productionChart" width="800" height="400"></canvas>
+    @Html.CreateChart("weightChart", totalWeightChart)
+    
+    @Html.CreateChart("productionChart", productionChart)
+
 </div>
+

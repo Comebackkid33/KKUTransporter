@@ -19,7 +19,9 @@
     
 </head>
 
+<style>
 
+</style>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -45,15 +47,27 @@
 
 <style>
     
-.numberlist {
-    width: 100% !important;
+    .numberlist {
+        width: 100% !important;
+    }
+#divLoading {
+  height: 400px;
+  position: relative;
+
 }
-     
+.ajax-loader {
+  position: absolute;
+  left: 0;
+  top: 200px;
+  right: 0;
+  bottom: 0;
+  margin: auto; 
+} 
 </style>
 
 
 <h3>Поиск смен</h3>
-@using (Ajax.BeginForm("GetShifts", "Shift", new AjaxOptions {HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "shifts" }))
+@using (Ajax.BeginForm("GetShifts", "Shift", new AjaxOptions {HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "shifts", OnBegin = "onBegin", OnComplete = "onComplete" }))
 {
     <div style="display: inline-block">
         @Html.LabelFor(model => model.Factory.Name, new {@class = "control-label", @align = "center"})
@@ -85,10 +99,24 @@
         <input type="submit" value="Выбрать" id="Button" class="btn btn-info"/>
     </div>
 }
-<br />
+<br/>
 
+<script type="text/javascript">
+    function onBegin() {
+        $("#shifts").html("");
+        $("#divLoading").show();
+    }
+
+    function onComplete() {
+        $("#divLoading").hide();
+    }
+</script>
+<div id="divLoading" hidden>
+    <img src="~/Content/Image/ajaxSpinner.gif" class="ajax-loader"  alt="Loading,  please wait"  />
+</div>
 
 <div id="shifts">
+
     
 </div>
 

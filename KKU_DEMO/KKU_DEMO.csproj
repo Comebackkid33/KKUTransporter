@@ -51,6 +51,10 @@
       <HintPath>..\packages\TLSharp.0.1.0.233\lib\net45\BigMath.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Chart.Mvc, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chart.Mvc.1.0.0.2\lib\net45\Chart.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -254,6 +258,7 @@
     <Compile Include="Managers\RoleManager.cs" />
     <Compile Include="Managers\SensorManager.cs" />
     <Compile Include="Managers\ShiftManager.cs" />
+    <Compile Include="Managers\StatManager.cs" />
     <Compile Include="Managers\TelegramManager.cs" />
     <Compile Include="Migrations\201705121120035_deploy.cs" />
     <Compile Include="Migrations\201705121120035_deploy.Designer.cs">
@@ -297,6 +302,7 @@
     <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\ajaxSpinner.gif" />
     <Content Include="Content\Image\Calendar\Kvartal1.png" />
     <Content Include="Content\Image\Calendar\Kvartal2.png" />
     <Content Include="Content\Image\Calendar\Kvartal3.png" />
@@ -322,6 +328,7 @@
     <None Include="Properties\PublishProfiles\reg.ru.pubxml" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Clock.js" />
     <Content Include="Scripts\HighlightLi.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.js" />

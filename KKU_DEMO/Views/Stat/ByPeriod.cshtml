@@ -1,15 +1,34 @@
 ﻿@using KKU_DEMO.App_Start
-@model dynamic
+@model KKU_DEMO.Models.StatModel
 
 <head>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/InfoPopUp.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+
 
 </head>
 
+<style>
+    .numberlist {
+        width: 100% !important;
+    }
 
+    #divLoading {
+        height: 400px;
+        position: relative;
+    }
+
+    .ajax-loader {
+        position: absolute;
+        left: 0;
+        top: 200px;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+</style>
 
 <h3> Укажите период:</h3>
 
@@ -36,19 +55,36 @@
 <script>
     $(document).ready(function() {
         $("#Button").click(function () {
+            onBegin();
             $.ajax({
                 url: "@Strings.HostUrl/Stat/GetByPeriod/?Start=" + $("#Date0").val() + "&End=" + $("#Date1").val(),
                 cache: false,
-                success: function(html) {
+                success: function (html) {
+                    onComplete();
                     $("#stats").html(html);
+
                 }
             });
         });
     })
 
 
-
 </script>
+<script type="text/javascript">
+    function onBegin() {
+        $("#stats").html("");
+        $("#divLoading").show();
+    }
+
+    function onComplete() {
+        $("#divLoading").hide();
+    }
+</script>
+<div id="divLoading" hidden>
+    <img src="~/Content/Image/ajaxSpinner.gif" class="ajax-loader" alt="Loading,  please wait" />
+</div>
+
 <div id="stats">
 
 </div>
+

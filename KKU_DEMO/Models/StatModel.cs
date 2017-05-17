@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Antlr.Runtime.Misc;
 using KKU_DEMO.Models.DataModels;
 
 namespace KKU_DEMO.Models
@@ -18,7 +19,36 @@ namespace KKU_DEMO.Models
         [Display(Name = "Процент выхода:")]
         public double ProductionPct { get; set; }
      
+        public List<double> TotalWeightList { get; set; }
+        public List<double> ProductionPctList { get; set; }
+        public List <string> DateList { get; set; }
 
-       
+        public StatModel()
+        {
+            Date = null;
+            TotalWeight = 0;
+            DownTime = 0;
+            ProductionPct = 0;
+            TotalWeightList = new List<double>();
+            ProductionPctList= new ListStack<double>();
+            DateList = new List<string>();
+
+        }
+        /// <summary>
+        /// Устанавливает список дат, для подписи к диаграмме
+        /// </summary>
+        /// <param name="Start"></param>
+        /// <param name="End"></param>
+        public void SetDateList(DateTime Start, DateTime End)
+        {
+           
+            while ((End - Start).TotalDays > 0)
+            {
+                DateList.Add(Start.ToShortDateString());
+                Start= Start.AddDays(1);
+            }
+        }
+
     }
+ 
 }

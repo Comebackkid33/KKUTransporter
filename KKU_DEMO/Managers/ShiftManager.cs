@@ -11,6 +11,7 @@ using KKU_DEMO.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using WebGrease.Css.Ast.Selectors;
 
 namespace KKU_DEMO.Managers
 {
@@ -209,6 +210,7 @@ namespace KKU_DEMO.Managers
 
         public void Update(ShiftCreateModel shiftCreateModel)
         {
+ 
             Shift shift = db.Shift.Find(shiftCreateModel.Id);
             shift.Date = shiftCreateModel.Date;
             shift.Number = shiftCreateModel.Number;
@@ -220,14 +222,36 @@ namespace KKU_DEMO.Managers
             shift.DownTime = shiftCreateModel.DownTime;
             shift.ProductionPct = shiftCreateModel.ProductionPct;
             shift.TotalShiftWeight = shiftCreateModel.TotalShiftWeight;
-            
-            db.SaveChanges();
+
+            if (CheckExistense(shiftCreateModel))
+            {
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Смена уже существует или не была изменена");
+            }
+          
         }
 
         public bool CheckExistense(ShiftCreateModel shiftCreateModel)
         {
             var shift = db.Shift.FirstOrDefault(s => s.Date == shiftCreateModel.Date && s.Number == shiftCreateModel.Number && s.FactoryId == shiftCreateModel.FactoryId);
-            return shift == null;
+            if (shiftCreateModel.Id != null && shift != null)
+            {
+                if (shiftCreateModel.Id == shift.Id)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return shift == null;
+            }
         }
 
         public double GetTotalWeight(Shift shift)
@@ -254,6 +278,52 @@ namespace KKU_DEMO.Managers
                 return shift.TotalShiftWeight;
             }
         }
+        /// <summary>
+        /// Возвращает общую выработку за день по всем подразделениям
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public double GetShiftTotalWeightByDay(DateTime day)
+        {
+            double totalweightByDay = 0;
+            var shifts = db.Shift.Where(s => s.Date == day && s.State==StateEnum.CLOSED.ToString()).ToList();
+            foreach (var s in shifts)
+            {
+                totalweightByDay += s.TotalShiftWeight;
+            }
+            return totalweightByDay;
+        }
+        /// <summary>
+        /// Возвращает средний коофициент выхода за день по всем подразделениям
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public double GetShiftProductionByDay(DateTime day)
+        {
+            double ProductionByDay = 0;
+            var shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
+            foreach (var s in shifts)
+            {
+                ProductionByDay += s.ProductionPct;
+            }
+            return (shifts.Count == 0) ? 0 : ProductionByDay / shifts.Count;
+        }
+        /// <summary>
+        /// Список всех смен в интервал времени, во всех подразделениях
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public List<Shift> GetByTimeInterval(DateTime start, DateTime end)
+        {
+
+            var shifts =
+                db.Shift.Where(
+                    c =>
+                        (c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <= 0 &&
+                         c.State == StateEnum.CLOSED.ToString())).Select(c => c).OrderBy(c => c.Date).ToList();
+            return shifts;
+        } 
         /// <summary>
         /// Переключает смену если есть следующая, если нет, заканчивает текущую смену
         /// </summary>

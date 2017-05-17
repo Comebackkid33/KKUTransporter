@@ -132,17 +132,17 @@ namespace KKU_DEMO.Controllers
         public ActionResult Edit(ShiftCreateModel sh)
         {
             
-            if (true)
+            try 
             {
                ShiftManager.Update(sh);
                Success($"<b>Смена {sh.Number} от {sh.Date:d}</b> была успешно изменена.", true);
 
                 return RedirectToAction("Get", "Shift");
             }
-            else
+            catch(Exception)
             {
-                Danger("Что-то пошло нетак, проверте данные");
-                return RedirectToAction("ShiftEditError", "Error");
+                Danger("Смена с такими параметрами уже существует");
+                return RedirectToAction("Get", "Shift");
             }
         }
     }

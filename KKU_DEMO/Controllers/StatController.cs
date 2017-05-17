@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KKU_DEMO.DAL;
+using KKU_DEMO.Managers;
 using KKU_DEMO.Models;
 using KKU_DEMO.Models.Helpers;
 
@@ -12,12 +13,21 @@ namespace KKU_DEMO.Controllers
     public class StatController : BaseController
     {
         private static readonly KKUContext db = new KKUContext();
+
+        private StatManager StatManager;
+
+        public StatController()
+        {
+            StatManager = new StatManager();
+        }
+
         [AuthorizeUser("SuperAdmin", "Director")]
         public ActionResult ByDay()
         {
 
             return View();
         }
+
         [AuthorizeUser("SuperAdmin", "Director")]
         public ActionResult GetByDay(string id)
         {
@@ -27,8 +37,9 @@ namespace KKU_DEMO.Controllers
             double productionPct = 0;
             var d = DateTime.Parse(id + " 00:00:00.000", System.Globalization.CultureInfo.InvariantCulture);
 
-       
-            var shifts = db.Shift.Where(c => (c.Date == d && c.State ==StateEnum.CLOSED.ToString())).Select(c => c).ToList();
+
+            var shifts =
+                db.Shift.Where(c => (c.Date == d && c.State == StateEnum.CLOSED.ToString())).Select(c => c).ToList();
 
             if (shifts.Count != 0)
             {
@@ -51,57 +62,46 @@ namespace KKU_DEMO.Controllers
                 });
             }
 
-                
+
             else
                 return RedirectToAction("ShiftError", "Error");
-            
+
         }
+
         [AuthorizeUser("SuperAdmin", "Director")]
         public ActionResult ByPeriod()
         {
 
             return View();
         }
+
         [AuthorizeUser("SuperAdmin", "Director")]
-        public ActionResult GetByPeriod(string Start, string End)
+        public ActionResult GetByPeriod(string start, string end)
         {
-            //var buf = id.Split('&');
-      
-            double totalWeight = 0;
-            int downTime = 0;
-            double productionPct = 0;
-
-            var start = DateTime.Parse(Start + " 00:00:00.000", System.Globalization.CultureInfo.InvariantCulture);
-            var end = DateTime.Parse(End + " 00:00:00.000", System.Globalization.CultureInfo.InvariantCulture);
-
-
-            var shifts = db.Shift.Where(c => (c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <=0 && c.State == StateEnum.CLOSED.ToString())).Select(c => c).ToList();
-
-            if (shifts.Count != 0)
+            
+            try
+            {
+                var stat = StatManager.ByPeriod(start, end);
+                if (stat != null)
+                {
+                    return View("~/Views/Stat/GetByDay.cshtml", stat);
+                }
+                else
+                {
+                    throw new Exception("Нет смен в указанном периоде");
+                }
+                
+            }
+            catch (Exception)
             {
 
-                foreach (var s in shifts)
-                {
-                    totalWeight = totalWeight + s.TotalShiftWeight;
-                    downTime = downTime + s.DownTime;
-                    productionPct = productionPct + s.ProductionPct;
-                }
-
-                productionPct = productionPct / shifts.Count;
-
-                return View("~/Views/Stat/GetByDay.cshtml",new StatModel()
-                {
-                    Date = start.ToShortDateString() + " - " + end.ToShortDateString(),
-                    TotalWeight = totalWeight,
-                    DownTime = downTime,
-                    ProductionPct = productionPct
-                });
+                return RedirectToAction("ShiftError", "Error");
             }
 
 
-            else
-                return RedirectToAction("ShiftError", "Error");
-
         }
+
     }
+
+
 }

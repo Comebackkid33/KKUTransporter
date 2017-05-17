@@ -684,3 +684,6 @@ d:\prodjects\KKU_main\KKU_DEMO\bin\ru\System.Web.WebPages.Razor.resources.dll
 d:\prodjects\KKU_main\KKU_DEMO\bin\ru\System.Net.Http.Formatting.resources.dll
 d:\prodjects\KKU_main\KKU_DEMO\bin\ru\System.Web.Http.resources.dll
 d:\prodjects\KKU_main\KKU_DEMO\bin\ru\System.Web.Http.WebHost.resources.dll
+D:\prodjects\KKU_main\KKU_DEMO\bin\Chart.Mvc.dll
+D:\prodjects\KKU_main\KKU_DEMO\bin\Chart.Mvc.pdb
+D:\prodjects\KKU_main\KKU_DEMO\bin\Chart.Mvc.xml

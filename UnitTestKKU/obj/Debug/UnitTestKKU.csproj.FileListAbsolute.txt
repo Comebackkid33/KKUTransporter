@@ -81,3 +81,5 @@ D:\prodjects\KKU_main\UnitTestKKU\bin\Debug\Castle.Core.dll
 D:\prodjects\KKU_main\UnitTestKKU\bin\Debug\Moq.dll
 D:\prodjects\KKU_main\UnitTestKKU\bin\Debug\Castle.Core.xml
 D:\prodjects\KKU_main\UnitTestKKU\bin\Debug\Moq.xml
+D:\prodjects\KKU_main\UnitTestKKU\bin\Debug\Antlr3.Runtime.dll
+D:\prodjects\KKU_main\UnitTestKKU\bin\Debug\Antlr3.Runtime.pdb
