@@ -1,0 +1,139 @@
+﻿@model KKU_DEMO.Models.StatModel
+
+@{
+    Layout = null;
+}
+
+@using Chart.Mvc.ComplexChart;
+@using Chart.Mvc.Extensions
+@{
+    var DateList = new List<string>();
+    var TotalWeightList = new List<double>();
+    var ProductionPctList = new List<double>();
+    int totalIncidentCount = 0;
+
+    foreach (var e in Model.ExelTable)
+    {
+        DateList.Add(e.Date);
+        TotalWeightList.Add(e.TotalDayWeight);
+        ProductionPctList.Add(e.TotalProduction);
+        totalIncidentCount += e.IncidentCount;
+    }
+
+    var totalWeightChart = new LineChart();
+    totalWeightChart.ComplexData.Labels.AddRange(DateList.ToArray());
+    totalWeightChart.ComplexData.Datasets.AddRange(new List<ComplexDataset>
+                             {
+                                new ComplexDataset
+                                    {
+                                        Data =TotalWeightList,
+                                        Label = "Общая выработка",
+                                        FillColor = "rgba(151,187,205,0.2)",
+                                        StrokeColor = "rgba(151,187,205,1)",
+                                        PointColor = "rgba(151,187,205,1)",
+                                        PointStrokeColor = "#fff",
+                                        PointHighlightFill = "#fff",
+                                        PointHighlightStroke = "rgba(151,187,205,1)",
+                                    }
+
+                            });
+    var productionChart = new LineChart();
+    productionChart.ComplexData.Labels.AddRange(DateList.ToArray());
+    productionChart.ComplexData.Datasets.AddRange(new List<ComplexDataset>
+                             {
+                                new ComplexDataset
+                                    {
+                                        Data = ProductionPctList,
+                                        Label = "Средний коэффициент выхода ",
+                                        FillColor = "rgba(217,83,79,0.2)",
+                                        StrokeColor = "rgba(217,83,79,1)",
+                                        PointColor = "rgba(217,83,79,1)",
+                                        PointStrokeColor = "#fff",
+                                        PointHighlightFill = "#fff",
+                                        PointHighlightStroke = "rgba(217,83,79,1)",
+                                    }
+
+                            });
+}
+<div>
+    <style>
+        .dl-horizontal dt 
+        {
+            white-space: normal;
+            width: 200px; 
+            margin-right: 10px
+        }
+    </style>
+    <div class="panel panel-success" style="margin-top: 20px; width: 500px">
+
+        <div class="panel-heading">Статистика за период</div>
+
+        <div class="panel-body">
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+
+                <dd>
+                    @($"{Model.Date:d}")
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TotalWeight)
+                </dt>
+
+                <dd>
+                    @($"{Model.TotalWeight:0.###}") т
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DownTime)
+                </dt>
+
+                <dd>
+                    @($"{Model.DownTime/3600}") ч. @($"{(Model.DownTime%3600)/60}") мин. @($"{Model.DownTime%60}") сек.
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProductionPct)
+                </dt>
+
+                <dd>
+                    @($"{Model.ProductionPct:0.###}")%
+                </dd>
+                <dt >
+                    <b>Количество инцидентов:</b>
+                </dt>
+
+                <dd>
+                    @totalIncidentCount
+                </dd>
+                @using (Html.BeginForm("ExportToExcel", "Stat", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                {
+  
+                    @Html.HiddenFor(model=>model.Date)
+                    for (int i = 0; i < Model.ExelTable.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.ExelTable[i].TotalProduction)
+                        @Html.HiddenFor(model => Model.ExelTable[i].TotalDayWeight)
+                        @Html.HiddenFor(model => Model.ExelTable[i].Date)
+                        @Html.HiddenFor(model => Model.ExelTable[i].IncidentCount)
+       
+                    }
+                    <input type="submit" value="Получить в Excel" class="btn btn-success" style="float: right;"/>
+                }
+            </dl>
+        </div>
+    </div>
+    
+  
+    <h3>Общая выработка по дням:</h3>
+    <canvas id="weightChart" width="800" height="400"></canvas>
+    <h3>Средний коэффициент выхода по дням:</h3>
+    <canvas id="productionChart" width="800" height="400"></canvas>
+    @Html.CreateChart("weightChart", totalWeightChart)
+    
+    @Html.CreateChart("productionChart", productionChart)
+    
+
+</div>
+

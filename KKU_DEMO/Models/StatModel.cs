@@ -19,9 +19,8 @@ namespace KKU_DEMO.Models
         [Display(Name = "Процент выхода:")]
         public double ProductionPct { get; set; }
      
-        public List<double> TotalWeightList { get; set; }
-        public List<double> ProductionPctList { get; set; }
-        public List <string> DateList { get; set; }
+       
+        public List<ExelRow> ExelTable { get; set; }
 
         public StatModel()
         {
@@ -29,26 +28,20 @@ namespace KKU_DEMO.Models
             TotalWeight = 0;
             DownTime = 0;
             ProductionPct = 0;
-            TotalWeightList = new List<double>();
-            ProductionPctList= new ListStack<double>();
-            DateList = new List<string>();
+            ExelTable = new List<ExelRow>();
 
         }
-        /// <summary>
-        /// Устанавливает список дат, для подписи к диаграмме
-        /// </summary>
-        /// <param name="Start"></param>
-        /// <param name="End"></param>
-        public void SetDateList(DateTime Start, DateTime End)
-        {
-           
-            while ((End - Start).TotalDays > 0)
-            {
-                DateList.Add(Start.ToShortDateString());
-                Start= Start.AddDays(1);
-            }
-        }
+
+      
+
 
     }
- 
+
+    public class ExelRow
+    {
+        public string Date { get; set; }
+        public double TotalDayWeight { get; set; }
+        public double TotalProduction { get; set; }
+        public int IncidentCount { get; set; }
+    }
 }

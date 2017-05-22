@@ -445,7 +445,7 @@
     <Content Include="Views\Shared\_Alerts.cshtml" />
     <Content Include="Views\Shift\Info.cshtml" />
     <Content Include="Views\Stat\ByDay.cshtml" />
-    <Content Include="Views\Stat\GetByDay.cshtml" />
+    <Content Include="Views\Stat\_ByPeriod.cshtml" />
     <Content Include="Views\Stat\ByPeriod.cshtml" />
     <Content Include="Views\Shift\Edit.cshtml" />
     <Content Include="Views\Incident\Index.cshtml" />

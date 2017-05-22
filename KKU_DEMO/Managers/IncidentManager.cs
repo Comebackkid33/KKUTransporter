@@ -83,6 +83,19 @@ namespace KKU_DEMO.Managers
             
         }
 
+        public List<Incident> GetByDay(DateTime day)
+        {
+            var incidents = GetAllIncidents();
+            var listOfIncidents = new List<Incident>();
+            foreach (var i in incidents)
+            {
+                if (i.Time.Date == day.Date)
+                {
+                    listOfIncidents.Add(i);
+                }
+            }
+            return listOfIncidents;
+        }
         public void Notify(Incident incident)
         {
             MailManager.SendMail("kurganovk@gmail.com", incident);

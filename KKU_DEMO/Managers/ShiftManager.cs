@@ -15,7 +15,7 @@ using WebGrease.Css.Ast.Selectors;
 
 namespace KKU_DEMO.Managers
 {
-    public class ShiftManager:IManager<Shift>
+    public class ShiftManager : IManager<Shift>
     {
         private KKUContext db;
         private RoleManager<IdentityRole> RoleManager;
@@ -27,22 +27,21 @@ namespace KKU_DEMO.Managers
         {
             db = new KKUContext();
 
-            RoleManager =  new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             UserManager = new UserManager(new UserStore<User>(db));
             FactoryManager = new FactoryManager();
             SensorManager = new SensorManager();
-
         }
+
         public ShiftManager()
         {
             db = new KKUContext();
 
-            
+
             FactoryManager = new FactoryManager();
             SensorManager = new SensorManager();
-
-
         }
+
         public ShiftManager(SensorManager sensorManager)
         {
             db = new KKUContext();
@@ -50,14 +49,13 @@ namespace KKU_DEMO.Managers
 
             FactoryManager = new FactoryManager();
             SensorManager = sensorManager;
-
-
         }
 
         public List<Shift> GetAll(int id)
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// Возвращает список смен, попараметрам поиска
         /// </summary>
@@ -83,23 +81,22 @@ namespace KKU_DEMO.Managers
             {
                 query = query.Where(c => c.Number == shiftSearchModel.Number);
             }
-            if (shiftSearchModel.UserId != "0" )
+            if (shiftSearchModel.UserId != "0")
             {
                 query = query.Where(c => c.UserId == shiftSearchModel.UserId);
             }
 
             shifts = query.ToList();
 
-         
 
             if (shifts.Count != 0)
-            foreach (var sh in shifts)
-            {
-                if (sh.StateEnum == StateEnum.INPROCESS)
+                foreach (var sh in shifts)
                 {
-                    sh.TotalShiftWeight = GetTotalWeight(sh);
+                    if (sh.StateEnum == StateEnum.INPROCESS)
+                    {
+                        sh.TotalShiftWeight = GetTotalWeight(sh);
+                    }
                 }
-            }
 
             return shifts.OrderBy(x => x.Date).ThenBy(x => x.FactoryId).ThenBy(x => x.Number).ToList();
         }
@@ -118,19 +115,18 @@ namespace KKU_DEMO.Managers
                 {
                     shift.TotalShiftWeight = GetTotalWeight(shift);
                     shift.ProductionPct = ProductionPct(shift);
-
                 }
-                
             }
             return shift;
         }
+
         /// <summary>
         /// Возвращает все смены подразделения (определенного состояния)
         /// </summary>
         /// <param name="id">ID подразделения</param>
         /// <param name="state">Состояние смены</param>
         /// <returns></returns>
-        public List<Shift> GetByFactoryId(int? id, string state=null)
+        public List<Shift> GetByFactoryId(int? id, string state = null)
         {
             var query = db.Shift.AsQueryable();
             query = db.Shift.Where(s => s.Factory.Id == id);
@@ -139,10 +135,11 @@ namespace KKU_DEMO.Managers
             {
                 query = db.Shift.Where(s => s.State == state);
             }
-            
+
             var shifts = query.OrderBy(x => x.Date).ThenBy(x => x.Number).ToList();
             return shifts;
         }
+
         public void Create(Shift entity)
         {
             throw new NotImplementedException();
@@ -163,9 +160,9 @@ namespace KKU_DEMO.Managers
             var userIds = RoleManager.FindByName("Master").Users.Select(e => e.UserId).ToList();
             var masterlist = UserManager.Users.Where(e => userIds.Contains(e.Id)).ToList();
             var factoryList = FactoryManager.GetAll();
-            return new ShiftCreateModel(masterlist,factoryList);
-
+            return new ShiftCreateModel(masterlist, factoryList);
         }
+
         public ShiftCreateModel GetShiftCreateModel(int id)
         {
             var userIds = RoleManager.FindByName("Master").Users.Select(e => e.UserId).ToList();
@@ -173,33 +170,29 @@ namespace KKU_DEMO.Managers
             var factoryList = FactoryManager.GetAll();
 
             var shift = db.Shift.Find(id);
-            return new ShiftCreateModel(masterlist, factoryList,shift);
-
-
+            return new ShiftCreateModel(masterlist, factoryList, shift);
         }
+
         public ShiftSearchModel GetShiftSearchModel()
         {
             var userIds = RoleManager.FindByName("Master").Users.Select(e => e.UserId).ToList();
             var masterlist = UserManager.Users.Where(e => userIds.Contains(e.Id)).ToList();
             var factoryList = FactoryManager.GetAll();
             return new ShiftSearchModel(masterlist, factoryList);
-
         }
+
         public void Create(ShiftCreateModel shiftCreateModel)
         {
-
             Shift shift = new Shift(shiftCreateModel);
 
             shift.Factory = db.Factory.Where(b => b.Id == shift.FactoryId).Select(b => b).FirstOrDefault();
             shift.User = UserManager.FindById(shift.UserId);
-            
+
 
             db.Entry(shift).State = EntityState.Added;
             db.SaveChanges();
-
-
         }
-      
+
 
         public void Delete(int id)
         {
@@ -210,7 +203,6 @@ namespace KKU_DEMO.Managers
 
         public void Update(ShiftCreateModel shiftCreateModel)
         {
- 
             Shift shift = db.Shift.Find(shiftCreateModel.Id);
             shift.Date = shiftCreateModel.Date;
             shift.Number = shiftCreateModel.Number;
@@ -231,12 +223,13 @@ namespace KKU_DEMO.Managers
             {
                 throw new Exception("Смена уже существует или не была изменена");
             }
-          
         }
 
         public bool CheckExistense(ShiftCreateModel shiftCreateModel)
         {
-            var shift = db.Shift.FirstOrDefault(s => s.Date == shiftCreateModel.Date && s.Number == shiftCreateModel.Number && s.FactoryId == shiftCreateModel.FactoryId);
+            var shift = db.Shift.FirstOrDefault(s => s.Date == shiftCreateModel.Date &&
+                                                     s.Number == shiftCreateModel.Number &&
+                                                     s.FactoryId == shiftCreateModel.FactoryId);
             if (shiftCreateModel.Id != null && shift != null)
             {
                 if (shiftCreateModel.Id == shift.Id)
@@ -259,24 +252,35 @@ namespace KKU_DEMO.Managers
             var totalSensor = SensorManager.GetByFactoryId(shift.FactoryId, "Вход");
             if (totalSensor != null)
             {
-               return totalSensor.TotalWeight - shift.TotalShiftWeight;
+                return totalSensor.TotalWeight - shift.TotalShiftWeight;
             }
             else
             {
                 return shift.TotalShiftWeight;
             }
         }
+
         public double ProductionPct(Shift shift)
         {
-            var wasteSensor = SensorManager.GetByFactoryId(shift.FactoryId,"Отсев");
+            var wasteSensor = SensorManager.GetByFactoryId(shift.FactoryId, "Отсев");
             if (wasteSensor != null)
             {
-                return (1 - (wasteSensor.TotalWeight - shift.ProductionPct)/ shift.TotalShiftWeight) * 100;
+                return (1 - (wasteSensor.TotalWeight - shift.ProductionPct) / shift.TotalShiftWeight) * 100;
             }
             else
             {
                 return shift.TotalShiftWeight;
             }
+        }
+        /// <summary>
+        /// Проверяет, есть ли смены в выбранный день
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public bool CheckShiftsOnDay(DateTime day)
+        {
+            var shifts = db.Shift.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString());
+            return shifts != null;
         }
         /// <summary>
         /// Возвращает общую выработку за день по всем подразделениям
@@ -286,13 +290,19 @@ namespace KKU_DEMO.Managers
         public double GetShiftTotalWeightByDay(DateTime day)
         {
             double totalweightByDay = 0;
-            var shifts = db.Shift.Where(s => s.Date == day && s.State==StateEnum.CLOSED.ToString()).ToList();
-            foreach (var s in shifts)
-            {
-                totalweightByDay += s.TotalShiftWeight;
-            }
-            return totalweightByDay;
+            var shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
+
+        
+                foreach (var s in shifts)
+                {
+                    totalweightByDay += s.TotalShiftWeight;
+                }
+                return totalweightByDay;
+            
+           
+            
         }
+
         /// <summary>
         /// Возвращает средний коофициент выхода за день по всем подразделениям
         /// </summary>
@@ -308,6 +318,7 @@ namespace KKU_DEMO.Managers
             }
             return (shifts.Count == 0) ? 0 : ProductionByDay / shifts.Count;
         }
+
         /// <summary>
         /// Список всех смен в интервал времени, во всех подразделениях
         /// </summary>
@@ -316,14 +327,17 @@ namespace KKU_DEMO.Managers
         /// <returns></returns>
         public List<Shift> GetByTimeInterval(DateTime start, DateTime end)
         {
-
             var shifts =
                 db.Shift.Where(
-                    c =>
-                        (c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <= 0 &&
-                         c.State == StateEnum.CLOSED.ToString())).Select(c => c).OrderBy(c => c.Date).ToList();
+                        c =>
+                            c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <= 0 &&
+                            c.State == StateEnum.CLOSED.ToString())
+                    .Select(c => c)
+                    .OrderBy(c => c.Date)
+                    .ToList();
             return shifts;
-        } 
+        }
+
         /// <summary>
         /// Переключает смену если есть следующая, если нет, заканчивает текущую смену
         /// </summary>
@@ -348,9 +362,9 @@ namespace KKU_DEMO.Managers
                         shifts[i].StateEnum = StateEnum.CLOSED;
                         shifts[i].TotalShiftWeight = totalSensor.TotalWeight - shifts[i].TotalShiftWeight;
                         shifts[i].ProductionPct = (1 -
-                                                   (wasteSensor.TotalWeight - shifts[i].ProductionPct)/
-                                                   shifts[i].TotalShiftWeight)*100;
-                 
+                                                   (wasteSensor.TotalWeight - shifts[i].ProductionPct) /
+                                                   shifts[i].TotalShiftWeight) * 100;
+
 
                         flag = true;
                         if (shifts[i + 1].Date == shifts[i].Date && shifts[i + 1].Number == shifts[i].Number + 1 ||
@@ -366,7 +380,7 @@ namespace KKU_DEMO.Managers
                 }
                 if (flag == false)
                 {
-                    for (int i = 0; i < shifts.Count() ; i++)
+                    for (int i = 0; i < shifts.Count(); i++)
 
                     {
                         if (shifts[i].StateEnum == StateEnum.ASSIGNED)
@@ -379,13 +393,11 @@ namespace KKU_DEMO.Managers
                     }
                 }
                 db.SaveChanges();
-
             }
             else
             {
                 throw new Exception("Ошибка поиска смены или датчика");
             }
-            
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using KKU_DEMO.DAL;
 using KKU_DEMO.Managers;
 using KKU_DEMO.Models;
@@ -29,7 +32,7 @@ namespace KKU_DEMO.Controllers
         }
 
         [AuthorizeUser("SuperAdmin", "Director")]
-        public ActionResult GetByDay(string id)
+        public ActionResult _ByPeriod(string id)
         {
 
             double totalWeight = 0;
@@ -84,7 +87,7 @@ namespace KKU_DEMO.Controllers
                 var stat = StatManager.ByPeriod(start, end);
                 if (stat != null)
                 {
-                    return View("~/Views/Stat/GetByDay.cshtml", stat);
+                    return View("~/Views/Stat/_ByPeriod.cshtml", stat);
                 }
                 else
                 {
@@ -100,8 +103,37 @@ namespace KKU_DEMO.Controllers
 
 
         }
+        [HttpPost]
+        [AuthorizeUser("SuperAdmin", "Director")]
+        public ActionResult ExportToExcel(StatModel statModel)
+        {
+            GridView gridview = new GridView();
+            gridview.DataSource = statModel.ExelTable;
+            gridview.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            // set the header
+            Response.AddHeader("content-disposition", "attachment;filename = itfunda.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            // create HtmlTextWriter object with StringWriter
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    // render the GridView to the HtmlTextWriter
+                    gridview.RenderControl(htw);
+                    // Output the GridView content saved into StringWriter
+                    Response.Output.Write(sw.ToString());
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+            return View("ByPeriod");
+        }
+
+    }
 
     }
 
 
-}

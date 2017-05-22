@@ -12,10 +12,13 @@ namespace KKU_DEMO.Managers
     {
         private KKUContext db;
         private ShiftManager ShiftManager;
+        private IncidentManager IncidentManager;
+
         public StatManager()
         {
             db = new KKUContext();
             ShiftManager = new ShiftManager();
+            IncidentManager = new IncidentManager();
         }
 
         public StatModel ByPeriod(string Start, string End)
@@ -27,8 +30,8 @@ namespace KKU_DEMO.Managers
 
 
             stat.Date = Start + " - " + End;
-            stat.SetDateList(start, end);
             stat = SetLists(start, end, stat);
+           
 
             var shifts = ShiftManager.GetByTimeInterval(start, end);
               
@@ -59,9 +62,20 @@ namespace KKU_DEMO.Managers
         {
             while (end.Date != start.Date)
             {
-               stat.TotalWeightList.Add(ShiftManager.GetShiftTotalWeightByDay(start));
-               stat.ProductionPctList.Add(ShiftManager.GetShiftProductionByDay(start));
-               start =  start.AddDays(1);
+                if (ShiftManager.CheckShiftsOnDay(start))
+                {
+                    
+                    var  row = new ExelRow()
+                    {
+                        Date = start.ToShortDateString(),
+                        TotalDayWeight = ShiftManager.GetShiftTotalWeightByDay(start),
+                        TotalProduction = ShiftManager.GetShiftProductionByDay(start),
+                        IncidentCount = IncidentManager.GetByDay(start).Count
+
+                    };
+                    stat.ExelTable.Add(row);
+                }
+                start =  start.AddDays(1);
             }
             return stat;
         }

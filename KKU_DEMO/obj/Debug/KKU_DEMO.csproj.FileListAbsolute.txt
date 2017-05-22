@@ -472,13 +472,9 @@ D:\Projects\KKU_Main\KKU_DEMO\bin\ru\System.Net.Http.Formatting.resources.dll
 D:\Projects\KKU_Main\KKU_DEMO\bin\ru\System.Web.Http.resources.dll
 D:\Projects\KKU_Main\KKU_DEMO\bin\ru\System.Web.Http.WebHost.resources.dll
 D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.csprojResolveAssemblyReference.cache
-D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.addSensorInIncident.resources
-D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.stateRename.resources
-D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.addChatId.resources
 D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.csproj.GenerateResource.Cache
 D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.dll
 D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.pdb
-D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.jenfrjf.resources
 C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.deploy.resources
 C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Debug\KKU_DEMO.csproj.GenerateResource.Cache
 C:\Users\Костя\Documents\Visual Studio 2015\Projects\KKU\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.efsdfsdf.resources
@@ -687,3 +683,8 @@ d:\prodjects\KKU_main\KKU_DEMO\bin\ru\System.Web.Http.WebHost.resources.dll
 D:\prodjects\KKU_main\KKU_DEMO\bin\Chart.Mvc.dll
 D:\prodjects\KKU_main\KKU_DEMO\bin\Chart.Mvc.pdb
 D:\prodjects\KKU_main\KKU_DEMO\bin\Chart.Mvc.xml
+D:\Projects\KKU_Main\KKU_DEMO\bin\Chart.Mvc.dll
+D:\Projects\KKU_Main\KKU_DEMO\bin\Chart.Mvc.pdb
+D:\Projects\KKU_Main\KKU_DEMO\bin\Chart.Mvc.xml
+D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.deploy.resources
+D:\Projects\KKU_Main\KKU_DEMO\obj\Debug\KKU_DEMO.Migrations.efsdfsdf.resources
