@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web;
 using KKU_DEMO.DAL;
@@ -21,10 +22,19 @@ namespace KKU_DEMO.Managers
             TelegramManager = new TelegramManager();
         }
 
-        public List<Incident> GetAllIncidents()
+        public List<Incident> GetAllIncidents(int factoryId=0)
         {
-           
-            return db.Incident.OrderBy(u => u.Time).ToList();
+           var intedentList = new  List<Incident>();
+            if (factoryId == 0)
+            {
+                intedentList = db.Incident.ToList();
+
+            }
+            else
+            {
+                intedentList = db.Incident.Where(s => s.Shift.FactoryId == factoryId).ToList();
+            }
+            return intedentList.OrderBy(u => u.Time).ToList();
         }
 
         public List<Incident> GetIncidentsByUser(string id)
@@ -83,10 +93,11 @@ namespace KKU_DEMO.Managers
             
         }
 
-        public List<Incident> GetByDay(DateTime day)
+        public List<Incident> GetByDay(DateTime day,int factoryId)
         {
-            var incidents = GetAllIncidents();
+            var incidents = GetAllIncidents(factoryId);
             var listOfIncidents = new List<Incident>();
+
             foreach (var i in incidents)
             {
                 if (i.Time.Date == day.Date)

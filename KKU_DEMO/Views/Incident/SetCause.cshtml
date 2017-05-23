@@ -4,7 +4,12 @@
   
     Layout = null;
 }
+<script>
+    $(document).ready(function() {
+        $('.selectpicker').selectpicker();
+    });
 
+</script>
 
 @{
     List<SelectListItem> CauseList = new List<SelectListItem>();
@@ -21,10 +26,16 @@
 {
     @Html.ValidationSummary(false)
 
-    <div class="form-group">
-        <b>Причина:</b>
-        <div>
-            @Html.DropDownListFor(model => model.CauseId, CauseList)
+    <div class="form-group" >
+
+        <div class="col-md-2" style="padding-top: 5px">
+            <b>Причина:</b>
+        </div>
+        <div class="col-md-5">
+            @Html.DropDownListFor(model => model.CauseId, CauseList, new {@class = "selectpicker"})
+        </div>
+        <div class ="col-md-5">
+            <input type="submit" value="Определить" class="btn btn-success" style="float: right;" />
         </div>
     </div>
     <div class="form-group">
@@ -37,13 +48,11 @@
     <div class="form-group">
 
         <div>
-            @Html.HiddenFor(model => model.Time, CauseList)
+            @Html.HiddenFor(model => model.Time, CauseList )
         </div>
     </div>
 
     <div class="form-group" style="display: inline-block;  padding-left: 70px;">
-        <div>
-            <input type="submit" value="Определить" class="btn btn-success" />
-        </div>
+      
     </div>
 }

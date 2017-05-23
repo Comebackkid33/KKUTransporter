@@ -8,6 +8,11 @@
     <script src="~/Scripts/Chart.js"></script>
 
 
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-select.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-select.min.css">
+
 </head>
 
 <style>
@@ -43,8 +48,15 @@
 <div style="display:inline-block">
     по:
 </div>
-<div style="display:inline-block">
+<div style="display: inline-block">
     <input class="form-control text-box single-line" id="Date1" name="Date1" type="date" value="">
+</div>
+
+<div style="display:inline-block">
+    Подразделение:
+</div>
+<div style="display: inline-block">
+    @Html.DropDownListFor(model => model.FactoryId, Model.FactoryList, new { @class = "selectpicker", @id = "FactoryId" })
 </div>
 <div style="display: inline-block">
     <input type="button" value="Выбрать" id="Button" class="btn btn-info" />
@@ -57,7 +69,7 @@
         $("#Button").click(function () {
             onBegin();
             $.ajax({
-                url: "@Strings.HostUrl/Stat/GetByPeriod/?Start=" + $("#Date0").val() + "&End=" + $("#Date1").val(),
+                url: "@Strings.HostUrl/Stat/GetByPeriod/?Start=" + $("#Date0").val() + "&End=" + $("#Date1").val() +  "&FactoryId=" + $("#FactoryId").val(),
                 cache: false,
                 success: function (html) {
                     onComplete();

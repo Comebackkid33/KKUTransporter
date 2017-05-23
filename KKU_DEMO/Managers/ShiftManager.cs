@@ -277,9 +277,17 @@ namespace KKU_DEMO.Managers
         /// </summary>
         /// <param name="day"></param>
         /// <returns></returns>
-        public bool CheckShiftsOnDay(DateTime day)
+        public bool CheckShiftsOnDay(DateTime day, int factoryId)
         {
-            var shifts = db.Shift.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString());
+            Shift shifts = null;
+            if (factoryId == 0)
+            { 
+                 shifts = db.Shift.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString());
+            }
+            else
+            {
+                shifts = db.Shift.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId==factoryId);
+            }
             return shifts != null;
         }
         /// <summary>
@@ -287,13 +295,22 @@ namespace KKU_DEMO.Managers
         /// </summary>
         /// <param name="day"></param>
         /// <returns></returns>
-        public double GetShiftTotalWeightByDay(DateTime day)
+        public double GetShiftTotalWeightByDay(DateTime day, int factoryId)
         {
             double totalweightByDay = 0;
-            var shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
 
-        
-                foreach (var s in shifts)
+            var shifts = new List<Shift>();
+
+            if (factoryId == 0)
+            {
+                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
+
+            }
+            else
+            {
+                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId==factoryId).ToList();
+            }
+            foreach (var s in shifts)
                 {
                     totalweightByDay += s.TotalShiftWeight;
                 }
@@ -308,10 +325,20 @@ namespace KKU_DEMO.Managers
         /// </summary>
         /// <param name="day"></param>
         /// <returns></returns>
-        public double GetShiftProductionByDay(DateTime day)
+        public double GetShiftProductionByDay(DateTime day,int factoryId)
         {
             double ProductionByDay = 0;
-            var shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
+            var shifts = new List<Shift>();
+
+            if (factoryId == 0)
+            {
+                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
+
+            }
+            else
+            {
+                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId == factoryId).ToList();
+            }
             foreach (var s in shifts)
             {
                 ProductionByDay += s.ProductionPct;
@@ -325,16 +352,33 @@ namespace KKU_DEMO.Managers
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public List<Shift> GetByTimeInterval(DateTime start, DateTime end)
+        public List<Shift> GetByTimeInterval(DateTime start, DateTime end, int factoryId)
         {
-            var shifts =
-                db.Shift.Where(
+            var shifts = new List<Shift>();
+            if (factoryId == 0)
+            {
+                shifts =
+                    db.Shift.Where(
                         c =>
                             c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <= 0 &&
                             c.State == StateEnum.CLOSED.ToString())
+                        .Select(c => c)
+                        .OrderBy(c => c.Date)
+                        .ToList();
+
+            }
+            else
+            {
+                shifts =
+                db.Shift.Where(
+                        c =>
+                            c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <= 0 &&
+                            c.State == StateEnum.CLOSED.ToString() && c.FactoryId==factoryId)
                     .Select(c => c)
                     .OrderBy(c => c.Date)
                     .ToList();
+            }
+            
             return shifts;
         }
 
