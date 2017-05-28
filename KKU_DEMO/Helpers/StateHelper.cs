@@ -39,6 +39,20 @@ namespace KKU_DEMO.Helpers
 
             return MvcHtmlString.Empty;
         }
+
+        public static string TranslateRole(string role)
+        {
+            switch (role)
+            {
+                case "Master":
+                    return "Мастер";
+                case "Director":
+                    return "Директор";
+                case "SuperAdmin":
+                    return "Администратор";
+            }
+            return "";
+        }
     }
 }
 

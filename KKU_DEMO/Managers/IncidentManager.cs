@@ -110,7 +110,7 @@ namespace KKU_DEMO.Managers
         public void Notify(Incident incident)
         {
             MailManager.SendMail("kurganovk@gmail.com", incident);
-            TelegramManager.NotifyBot();
+            TelegramManager.NotifyBot(incident);
     
 
             }

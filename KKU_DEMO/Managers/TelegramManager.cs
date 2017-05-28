@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using KKU_DEMO.DAL;
+using KKU_DEMO.Models;
 using KKU_DEMO.Stores;
 using Microsoft.Ajax.Utilities;
 using Telegram.Bot;
@@ -33,10 +34,12 @@ namespace KKU_DEMO.Managers
         //    await client.SendMessageAsync(new TLInputPeerUser() {user_id = user.id}, "Привет");
         //}
 
-        public async void NotifyBot()
+        public async void NotifyBot(Incident incident)
         {
             var bot = new TelegramBotClient("295485776:AAFVGFM1kPqUM_RYSnqOrezRNh4Py95iHGw");
-            var t = await bot.SendTextMessageAsync(178561623, "Инцидент!!");
+            var message = String.Format("На заводе {0} в смену {1} в {2} произошел инцидент!",
+                incident.Shift.Factory.Name, incident.Shift.Number, incident.Time);
+            var t = await bot.SendTextMessageAsync(178561623, message);
         }
 
         public async void addChatId()

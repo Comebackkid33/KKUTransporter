@@ -31,8 +31,9 @@
             </div>
             <div class="modal-body">
                 <div id="Details">
-                    <img id="pic" src="~/Content/Image/spinner.gif" width="100%" />
+
                 </div>
+                <div id="DetailsSpiner"> <img id="pic" src="~/Content/Image/spinner.gif" width="100%" /></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -41,70 +42,14 @@
 
     </div>
 </div>
+<h3>Текущие показания датчиков</h3>
 
-<hr />
 <div id='table'></div>
 <hr />
 
 @*<div id="chartContainer" style="height: 300px; width: 50%;"></div>*@
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var dataPoints = [], chart;
-
-        // initial chart
-        $.getJSON("@Strings.HostUrl/Chart/json", function (data) {
-            dataPoints = data;
-
-            chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                backgroundColor: "#eee",
-                theme: "theme1",//theme1
-                axisX: {
-                    
-                   
-                },
-                axisY: {
-                    minimum: 880
-                },
-                title: {
-                    text: "Показания входного датчика"
-                },
-                data: [
-                  {
-                      // Change type to "bar", "splineArea", "area", "spline", "pie",etc.
-                      type: "line",
-                      color: "#d9534f",
-                      xValueType: "dateTime",
-                      dataPoints: dataPoints
-                  }
-                ]
-
-            });
-            
-            chart.render();
-            setTimeout(function () { updateChart() }, 3000);
-        });
-
-        function updateChart() {
-            $.getJSON("@Strings.HostUrl/Chart/json", function (data) {
-
-               
-                $.each(data, function (index) {
-                   
-                    dataPoints.push(data[index]);
-                });
-               
-                chart.axisY[0].set("minimum", dataPoints[0].y-10, true);
-                
-                chart.render();
-                setTimeout(function () { updateChart() }, 3000);
-            });
-        }
-
-    });
-</script>
 
 
 

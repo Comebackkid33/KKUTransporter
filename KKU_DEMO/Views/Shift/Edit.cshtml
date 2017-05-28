@@ -9,89 +9,73 @@
 </script>
 
 
+<div>
 
-    <div class="modal-dialog">
+    @using (Html.BeginForm("Edit", "Shift", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div style="margin: auto; top: 0; right: 0;bottom: 0;left: 0; width: 300px;" id="Form">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2>Изменить смену</h2>
+            @Html.ValidationSummary(false)
+
+
+            <div class="form-group">
+                <b>Завод:</b>
+                <div>
+                    @Html.DropDownListFor(model => model.FactoryId, Model.FactoryList, new { @class = "selectpicker", data_style = "btn-inverse" })
+
+                </div>
             </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("Edit", "Shift", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <div style="margin: auto; top: 0; right: 0;bottom: 0;left: 0; width: 300px;" id="Form">
-                        
-                        @Html.ValidationSummary(false)
 
-
-                        <div class="form-group">
-                            <b>Завод:</b>
-                            <div >
-                                @Html.DropDownListFor(model => model.FactoryId, Model.FactoryList, new { @class = "selectpicker" , data_style = "btn-inverse" })
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <b>Номер смены:</b>
-                            <div>
-                                @Html.DropDownListFor(model => model.Number, Model.NumberList, new { @class = "selectpicker" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <b>Мастер Смены:</b>
-                            <div>
-                                @Html.DropDownListFor(model => model.UserId, Model.MasterList, new { @class = "selectpicker" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <b>Дата:</b>
-                            <div>
-                                @Html.EditorFor(model => model.Date , new { htmlAttributes = new { @class = "form-control", @style = "max-width: 220px;" } })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <b>Статус:</b>
-                            <div>
-                                @Html.DropDownListFor(model => model.State, Model.stateList, new { @class = "selectpicker" })
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <b>Общая выработка:</b>
-                            <div>
-                                @Html.EditorFor(model => model.TotalShiftWeight, new {htmlAttributes = new {@class = "form-control"}})
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <b>Процент выхода:</b>
-                            <div>
-                                @Html.EditorFor(model => model.ProductionPct, new { htmlAttributes = new { @class = "form-control" } })
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group" style="display: inline-block;  padding-left: 70px;">
-                            <div>
-                                <input type="submit" value="Изменить" class="btn btn-success" />
-                            </div>
-                        </div>
-                    </div>
-                }
+            <div class="form-group">
+                <b>Номер смены:</b>
+                <div>
+                    @Html.DropDownListFor(model => model.Number, Model.NumberList, new { @class = "selectpicker" })
+                </div>
             </div>
-            <div class="modal-footer">
+            <div class="form-group">
+                <b>Мастер Смены:</b>
+                <div>
+                    @Html.DropDownListFor(model => model.UserId, Model.MasterList, new { @class = "selectpicker" })
+                </div>
+            </div>
 
-                <button id="modalClose" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <div class="form-group">
+                <b>Дата:</b>
+                <div>
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 220px;" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Статус:</b>
+                <div>
+                    @Html.DropDownListFor(model => model.State, Model.stateList, new { @class = "selectpicker" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <b>Общая выработка:</b>
+                <div>
+                    @Html.EditorFor(model => model.TotalShiftWeight, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Процент выхода:</b>
+                <div>
+                    @Html.EditorFor(model => model.ProductionPct, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+            </div>
+
+
+            <div class="form-group" style="display: inline-block;  padding-left: 70px;">
+                <div>
+                    <input type="submit" value="Изменить" class="btn btn-success" />
+                </div>
             </div>
         </div>
+    }
+
 
     </div>
-
-
-

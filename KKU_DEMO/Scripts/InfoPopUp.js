@@ -1,10 +1,11 @@
-﻿function info(id,url) {
+﻿function info(id, url) {
+    onSBegin();
     $.ajax({
         'url': url+id,
         'type': 'GET',
         success: function (html) {
             $("#Details").html(html);
-
+            onSComplete();
         }
     });
 
@@ -19,4 +20,14 @@ function edit(id, url) {
         }
     });
 
+}
+
+
+    function onSBegin() {
+        $("#Details").html("");
+        $("#DetailsSpiner").show();
+    }
+
+    function onSComplete() {
+    $("#DetailsSpiner").hide();
 }

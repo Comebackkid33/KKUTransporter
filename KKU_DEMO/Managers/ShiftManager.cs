@@ -404,6 +404,7 @@ namespace KKU_DEMO.Managers
                     if (shifts[i].StateEnum == StateEnum.INPROCESS)
                     {
                         shifts[i].StateEnum = StateEnum.CLOSED;
+                        shifts[i].DownTime = totalSensor.DownTime - shifts[i].DownTime;
                         shifts[i].TotalShiftWeight = totalSensor.TotalWeight - shifts[i].TotalShiftWeight;
                         shifts[i].ProductionPct = (1 -
                                                    (wasteSensor.TotalWeight - shifts[i].ProductionPct) /
@@ -417,6 +418,7 @@ namespace KKU_DEMO.Managers
                             shifts[i + 1].StateEnum = StateEnum.INPROCESS;
                             shifts[i + 1].TotalShiftWeight = totalSensor.TotalWeight;
                             shifts[i + 1].ProductionPct = wasteSensor.TotalWeight;
+                            shifts[i + 1].DownTime = totalSensor.DownTime;
                         }
 
                         break;
@@ -431,6 +433,7 @@ namespace KKU_DEMO.Managers
                         {
                             shifts[i].StateEnum = StateEnum.INPROCESS;
                             shifts[i].TotalShiftWeight = totalSensor.TotalWeight;
+                            shifts[i].DownTime = totalSensor.DownTime;
                             shifts[i].ProductionPct = wasteSensor.TotalWeight;
                             break;
                         }
