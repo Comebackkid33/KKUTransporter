@@ -43,7 +43,9 @@
     </div>
 </div>
 <h3>Текущие показания датчиков</h3>
-
+<div id="divLoading" >
+    <img src="~/Content/Image/ajaxSpinner.gif" class="ajax-loader" alt="Loading,  please wait" />
+</div>
 <div id='table'></div>
 <hr />
 
@@ -61,6 +63,7 @@
             cache: false,
             success: function(html) {
                 $("#table").html(html);
+                $("#divLoading").hide();
             }
         });
     }

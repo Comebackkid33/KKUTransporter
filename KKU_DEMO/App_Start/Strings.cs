@@ -8,7 +8,7 @@ namespace KKU_DEMO.App_Start
 {
     public static class Strings
     {
-        public static string HostUrl = "http://kovrovku.ru";
+        public static string HostUrl = "http://kovrovku.ru/";
 
        
 

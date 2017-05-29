@@ -61,7 +61,7 @@ namespace KKU_DEMO.Controllers
                 catch (Exception e)
                 {
                     var response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                    response.Content = new StringContent("Cant update selected sensor");
+                    response.Content = new StringContent(e.Message);
                     return response;
                 }
             }

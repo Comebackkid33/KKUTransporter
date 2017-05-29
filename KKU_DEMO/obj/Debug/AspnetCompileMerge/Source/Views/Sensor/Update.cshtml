@@ -1,44 +1,61 @@
 ﻿@using System.Globalization
 @using KKU_DEMO.App_Start
+@using KKU_DEMO.Models
 @using Microsoft.Owin.Security.DataHandler.Encoder
 @model IEnumerable<KKU_DEMO.Models.Sensor>
 
 @{
     Layout = null;
+    int? lastFactory = null;
 }
 
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Factory.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurWeight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalWeight)
-        </th>
-        <th>
-           NoLoadCount
-        </th>
-        <th>
-                
-        </th>
-    </tr>
+  
     @foreach (var item in Model)
     {
-        <tr class="@(item.State == "OK" ? "success" :( item.State == "STOP" ? "danger": "warning"))">
-            <td>
-                @Html.DisplayFor(modelItem => item.Factory.Name)
-            </td>
+        if (item.FactoryId != lastFactory)
+        {
+            <tr>
+                <td>
+                    <h4>@item.Factory.Name</h4>
+                </td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurWeight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalWeight)
+                </th>
+                <th>
+                    NoLoadCount
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+        }
+
+        lastFactory = item.FactoryId;
+
+
+             <tr class="@(item.State == "OK" ? "success" : (item.State == "STOP" ? "danger" : "warning"))">
+          
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -51,11 +68,12 @@
                     }
                 }
             </td>
+
             <td>
                 @{
                     if (item.State != "OK")
-                    { 
-                         <span class="glyphicon glyphicon-remove-circle"> </span>
+                    {
+                        <span class="glyphicon glyphicon-remove-circle"> </span>
 
                     }
                     else
@@ -71,7 +89,7 @@
                 <b> @($"{item.TotalWeight:0.##}") т</b>
             </td>
             <td>
-               @Html.DisplayFor(modelItem => item.NoLoadCount)
+                @Html.DisplayFor(modelItem => item.NoLoadCount)
             </td>
             <td>
 
@@ -80,7 +98,10 @@
             </td>
 
         </tr>
+    
                     }
-
+  
+    
+    
 </table>
 

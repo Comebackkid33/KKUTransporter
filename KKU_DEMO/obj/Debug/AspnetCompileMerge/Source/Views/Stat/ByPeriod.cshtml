@@ -1,15 +1,39 @@
 ﻿@using KKU_DEMO.App_Start
-@model dynamic
+@model KKU_DEMO.Models.StatModel
 
 <head>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/InfoPopUp.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+
+
+    <script src="~/Scripts/bootstrap-select.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-select.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-select.min.css">
 
 </head>
 
+<style>
+    .numberlist {
+        width: 100% !important;
+    }
 
+    #divLoading {
+        height: 400px;
+        position: relative;
+    }
+
+    .ajax-loader {
+        position: absolute;
+        left: 0;
+        top: 200px;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+</style>
 
 <h3> Укажите период:</h3>
 
@@ -24,8 +48,15 @@
 <div style="display:inline-block">
     по:
 </div>
-<div style="display:inline-block">
+<div style="display: inline-block">
     <input class="form-control text-box single-line" id="Date1" name="Date1" type="date" value="">
+</div>
+
+<div style="display:inline-block">
+    Подразделение:
+</div>
+<div style="display: inline-block">
+    @Html.DropDownListFor(model => model.FactoryId, Model.FactoryList, new { @class = "selectpicker", @id = "FactoryId" })
 </div>
 <div style="display: inline-block">
     <input type="button" value="Выбрать" id="Button" class="btn btn-info" />
@@ -36,19 +67,36 @@
 <script>
     $(document).ready(function() {
         $("#Button").click(function () {
+            onBegin();
             $.ajax({
-                url: "@Strings.HostUrl/Stat/GetByPeriod/?Start=" + $("#Date0").val() + "&End=" + $("#Date1").val(),
+                url: "@Strings.HostUrl/Stat/GetByPeriod/?Start=" + $("#Date0").val() + "&End=" + $("#Date1").val() +  "&FactoryId=" + $("#FactoryId").val(),
                 cache: false,
-                success: function(html) {
+                success: function (html) {
+                    onComplete();
                     $("#stats").html(html);
+
                 }
             });
         });
     })
 
 
-
 </script>
+<script type="text/javascript">
+    function onBegin() {
+        $("#stats").html("");
+        $("#divLoading").show();
+    }
+
+    function onComplete() {
+        $("#divLoading").hide();
+    }
+</script>
+<div id="divLoading" hidden>
+    <img src="~/Content/Image/ajaxSpinner.gif" class="ajax-loader" alt="Loading,  please wait" />
+</div>
+
 <div id="stats">
 
 </div>
+

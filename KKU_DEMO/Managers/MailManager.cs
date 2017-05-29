@@ -21,6 +21,7 @@ namespace KKU_DEMO.Managers
             this.pass = "KovrovKuBot1";
             this.name = "Бот Карьероуправления";
             this.smtp = new SmtpClient("smtp.gmail.com", 587);
+            this.smtp.UseDefaultCredentials = false;
             this.smtp.Credentials = new NetworkCredential(address, pass);
             this.smtp.EnableSsl = true;
         }

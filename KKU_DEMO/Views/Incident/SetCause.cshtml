@@ -36,12 +36,13 @@
         <div class="col-md-2" style="padding-top: 5px">
             <b>Причина:</b>
         </div>
-        <div class="col-md-5">
-            @Html.DropDownListFor(model => model.CauseId, CauseList, new {@class = "selectpicker"})
-        </div>
-        <div class ="col-md-5">
-            <input type="submit" value="Определить" class="btn btn-success" style="float: right;" />
-        </div>
+       
+            
+            @Html.DropDownListFor(model => model.CauseId, CauseList, new {@class = "selectpicker",@style = "display: inline-block" })
+            
+            <input type="submit" value="Определить" class="btn btn-success" style="display: inline-block" />
+        
+        
     </div>
     <div class="form-group">
        

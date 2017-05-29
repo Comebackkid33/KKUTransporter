@@ -19,8 +19,9 @@
 <div style="text-align: center">
     <a href="#" onclick="slide(0)">I квартал</a> | <a href="#" onclick="slide(1)">II квартал</a> | <a href="#" onclick="slide(2)">III квартал</a> | <a href="#" onclick="slide(3)">IV квартал</a>
 </div>
-<img id="pic" src="~/Content/Image/Calendar/Kvartal1.png" width="100%"/>
-<input type="button" name="send" value="отправить">
+
+<img id="pic" src ="" width="100%"/>
+
 
 <script language="javascript">
     var index = 0;
@@ -36,32 +37,31 @@
         element.src = links[v];
     }
 
-    $(function() {
-        $("input[name=send]").on("click", notifyMe);
-    });
-
-    document.addEventListener('DOMContentLoaded',
-        function() {
-            if (!Notification) {
-                alert('Desktop notifications not available in your browser. Try Chromium.');
-                return;
-            }
-
-            if (Notification.permission !== "granted")
-                Notification.requestPermission();
-        });
-
-
-    function notifyMe() {
-        Push.create("Hello world!", {
-            body: "How's it hangin'?",
-            vibrate: [200, 100],
-            timeout: 4000,
-            onClick: function() {
-                window.focus();
-                this.close();
-            }
-        });
-    }
+   
+  
 </script>
 
+<script>
+    $(document).ready(function () {
+        var date = new Date;
+
+        if (date.getMonth() < 3) {
+            $('#pic').prop("src", "@Strings.HostUrl/Content/Image/Calendar/Kvartal1.png");
+        }
+        else {
+            if (date.getMonth() < 6) {
+                $('#pic').prop("src", "@Strings.HostUrl/Content/Image/Calendar/Kvartal2.png");
+
+            }
+            else {
+                if (date.getMonth() < 9) {
+                    $('#pic').prop("src", "@Strings.HostUrl/Content/Image/Calendar/Kvartal3.png");
+
+                }
+                else {
+                    $('#pic').prop( "src","@Strings.HostUrl/Content/Image/Calendar/Kvartal4.png");
+                }
+            }
+        }
+    });
+</script>

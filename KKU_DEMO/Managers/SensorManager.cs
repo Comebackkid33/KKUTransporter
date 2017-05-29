@@ -107,7 +107,7 @@ namespace KKU_DEMO.Managers
                 {
                     IncidentManager.AddIncident(curShift.Id, sensor.Id);
                 }
-                if (sensor.NoLoadCount%maxOffCount == 0  && opIncident != null)
+                if (sensor.NoLoadCount!=0 && sensor.NoLoadCount % maxOffCount == 0  && opIncident != null)
                 {
                     IncidentManager.Notify(IncidentManager.GetIncident(curShift.Id, sensor.Id));
                 }
