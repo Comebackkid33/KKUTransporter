@@ -38,7 +38,7 @@ namespace KKU_DEMO.Managers
         {
             var bot = new TelegramBotClient("295485776:AAFVGFM1kPqUM_RYSnqOrezRNh4Py95iHGw");
             var message = String.Format("На заводе {0} в смену {1} в {2} произошел инцидент!",
-                incident.Shift.Factory.Name, incident.Shift.Number, incident.Time);
+                incident.Shift.Factory.Name, incident.Shift.Number, incident.Time.ToShortTimeString());
             var t = await bot.SendTextMessageAsync(178561623, message);
         }
 
