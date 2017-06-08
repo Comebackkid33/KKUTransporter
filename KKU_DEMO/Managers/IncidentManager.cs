@@ -6,18 +6,20 @@ using System.Linq;
 using System.Web;
 using KKU_DEMO.DAL;
 using KKU_DEMO.Models;
+using KKU_DEMO.Repositories;
 
 namespace KKU_DEMO.Managers
 {
     public class IncidentManager
     {
+        KKUContext db = new KKUContext();
         private MailManager MailManager;
         private TelegramManager TelegramManager;
-        private KKUContext db;
+        private IRepository<Incident> IncidentRepo;
    
         public IncidentManager()
         {
-            db = new KKUContext();
+            IncidentRepo = new IncidentRepository();
             MailManager = new MailManager();
             TelegramManager = new TelegramManager();
         }
@@ -27,12 +29,12 @@ namespace KKU_DEMO.Managers
            var intedentList = new  List<Incident>();
             if (factoryId == 0)
             {
-                intedentList = db.Incident.ToList();
+                intedentList = IncidentRepo.GetList().ToList();
 
             }
             else
             {
-                intedentList = db.Incident.Where(s => s.Shift.FactoryId == factoryId).ToList();
+                intedentList = IncidentRepo.GetList().Where(s => s.Shift.FactoryId == factoryId).ToList();
             }
             return intedentList.OrderBy(u => u.Time).ToList();
         }
@@ -40,7 +42,7 @@ namespace KKU_DEMO.Managers
         public List<Incident> GetIncidentsByUser(string id)
         {
           
-            return db.Incident.Where(u => u.Shift.UserId == id).OrderBy(u => u.Time).ToList();
+            return IncidentRepo.GetList().Where(u => u.Shift.UserId == id).OrderBy(u => u.Time).ToList();
         }
         /// <summary>
         /// Возвращает открытый инцидент в выбранную смену на выбранном датчике
@@ -51,23 +53,24 @@ namespace KKU_DEMO.Managers
         public Incident GetIncident(int shiftId, int sensorId)
         {
             
-            return db.Incident.FirstOrDefault(u => u.ShiftId == shiftId && u.SensorId == sensorId && u.State == StateEnum.OPENED.ToString());
+            return IncidentRepo.GetList().FirstOrDefault(u => u.ShiftId == shiftId && u.SensorId == sensorId && u.State == StateEnum.OPENED.ToString());
         }
         public Incident GetIncident(int id)
         {
             
-            return db.Incident.Find(id);
+            return IncidentRepo.Get(id);
         }
         public void UpdateIncident(Incident inc)
         {
-         
 
-            var incident = db.Incident.Find(inc.Id);
+            var cause = db.Cause.Find(inc.CauseId);
+            var incident = IncidentRepo.Get(inc.Id);
             incident.CauseId = inc.CauseId;
-            incident.Cause = db.Cause.Find(inc.CauseId);
+            incident.Cause = cause;
             incident.StateEnum = StateEnum.CLOSED;
-            db.Entry(incident).State = EntityState.Modified;
-            db.SaveChanges();
+
+            IncidentRepo.Update(incident);
+            IncidentRepo.Save();
             
         }
 

@@ -19,14 +19,11 @@ namespace KKU_DEMO.Controllers
     {
         private ShiftManager ShiftManager;
 
-        private ApplicationRoleManager RoleManager
-            => HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
-
-        private UserManager UserManager => HttpContext.GetOwinContext().GetUserManager<UserManager>();
+   
 
         public ShiftController()
         {
-            ShiftManager = new ShiftManager(HttpContext);
+            ShiftManager = new ShiftManager();
         }
 
         [AuthorizeUser("SuperAdmin")]

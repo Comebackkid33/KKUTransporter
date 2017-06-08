@@ -7,7 +7,9 @@ using System.Web.Http.ModelBinding;
 using KKU_DEMO.DAL;
 using KKU_DEMO.Models;
 using KKU_DEMO.Models.AuthModels;
+using KKU_DEMO.Models.DataModels;
 using KKU_DEMO.Models.ViewModels;
+using KKU_DEMO.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,36 +17,31 @@ using WebGrease.Css.Ast.Selectors;
 
 namespace KKU_DEMO.Managers
 {
-    public class ShiftManager : IManager<Shift>
+    public class ShiftManager 
     {
-        private KKUContext db;
+       // private KKUContext db;
         private RoleManager<IdentityRole> RoleManager;
         private UserManager UserManager;
         private FactoryManager FactoryManager;
         private SensorManager SensorManager;
 
-        public ShiftManager(HttpContextBase httpContext)
-        {
-            db = new KKUContext();
+        IRepository<Shift> ShiftRepo;
+      
 
-            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-            UserManager = new UserManager(new UserStore<User>(db));
-            FactoryManager = new FactoryManager();
-            SensorManager = new SensorManager();
-        }
+       
 
         public ShiftManager()
         {
-            db = new KKUContext();
-
-
+            ShiftRepo = new ShiftRepository();
+            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new KKUContext()));
+            UserManager = new UserManager(new UserStore<User>(new KKUContext()));
             FactoryManager = new FactoryManager();
             SensorManager = new SensorManager();
         }
 
         public ShiftManager(SensorManager sensorManager)
         {
-            db = new KKUContext();
+            ShiftRepo = new ShiftRepository();
 
 
             FactoryManager = new FactoryManager();
@@ -66,7 +63,7 @@ namespace KKU_DEMO.Managers
             List<Shift> shifts = new List<Shift>();
             DateTime defTime = new DateTime();
 
-            var query = db.Shift.AsQueryable();
+            var query = ShiftRepo.GetList().AsQueryable();
 
             if (shiftSearchModel.FactoryId != 0)
             {
@@ -103,12 +100,12 @@ namespace KKU_DEMO.Managers
 
         public List<Shift> GetAll()
         {
-            return db.Shift.ToList();
+            return ShiftRepo.GetList().ToList();
         }
 
         public Shift GetById(int id)
         {
-            var shift = db.Shift.Find(id);
+            var shift = ShiftRepo.Get(id);
             if (shift != null)
             {
                 if (shift.StateEnum == StateEnum.INPROCESS)
@@ -128,12 +125,12 @@ namespace KKU_DEMO.Managers
         /// <returns></returns>
         public List<Shift> GetByFactoryId(int? id, string state = null)
         {
-            var query = db.Shift.AsQueryable();
-            query = db.Shift.Where(s => s.Factory.Id == id);
+            var query = ShiftRepo.GetList().AsQueryable();
+            query = query.Where(s => s.Factory.Id == id);
 
             if (state != null)
             {
-                query = db.Shift.Where(s => s.State == state);
+                query = query.Where(s => s.State == state);
             }
 
             var shifts = query.OrderBy(x => x.Date).ThenBy(x => x.Number).ToList();
@@ -169,7 +166,7 @@ namespace KKU_DEMO.Managers
             var masterlist = UserManager.Users.Where(e => userIds.Contains(e.Id)).ToList();
             var factoryList = FactoryManager.GetAll();
 
-            var shift = db.Shift.Find(id);
+            var shift = ShiftRepo.Get(id);
             return new ShiftCreateModel(masterlist, factoryList, shift);
         }
 
@@ -183,41 +180,57 @@ namespace KKU_DEMO.Managers
 
         public void Create(ShiftCreateModel shiftCreateModel)
         {
-            Shift shift = new Shift(shiftCreateModel);
 
-            shift.Factory = db.Factory.Where(b => b.Id == shift.FactoryId).Select(b => b).FirstOrDefault();
-            shift.User = UserManager.FindById(shift.UserId);
+            //Shift shift = new Shift(shiftCreateModel);
+            //var factory = FactoryManager.GetAll().Where(b => b.Id == shiftCreateModel.FactoryId).Select(b => b).FirstOrDefault();
+            //var user = UserManager.FindById(shiftCreateModel.UserId);
 
+            Shift shift = new Shift()
+            {
+                Date = shiftCreateModel.Date,
+                FactoryId = shiftCreateModel.FactoryId,
+                Number = shiftCreateModel.Number,
+                UserId = shiftCreateModel.UserId,
+                StateEnum = StateEnum.ASSIGNED,
+                //Factory = factory,
+                //User =user,
+        };
 
-            db.Entry(shift).State = EntityState.Added;
-            db.SaveChanges();
+           
+            ShiftRepo.Create(shift);
+            ShiftRepo.Save();
+           
         }
 
 
         public void Delete(int id)
         {
-            var shift = db.Shift.Find(id);
-            db.Shift.Remove(shift);
-            db.SaveChanges();
+            ShiftRepo.Delete(id);
+            ShiftRepo.Save();
         }
 
         public void Update(ShiftCreateModel shiftCreateModel)
         {
-            Shift shift = db.Shift.Find(shiftCreateModel.Id);
+            //var factories = FactoryManager.GetAll().Where(b => b.Id == shiftCreateModel.FactoryId).Select(b => b).FirstOrDefault();
+            //var user = UserManager.FindById(shiftCreateModel.UserId);
+
+
+            Shift shift = ShiftRepo.Get(shiftCreateModel.Id);
             shift.Date = shiftCreateModel.Date;
             shift.Number = shiftCreateModel.Number;
             shift.State = shiftCreateModel.State;
             shift.FactoryId = shiftCreateModel.FactoryId;
-            shift.Factory = db.Factory.Where(b => b.Id == shift.FactoryId).Select(b => b).FirstOrDefault();
+           // shift.Factory = factories;
             shift.UserId = shiftCreateModel.UserId;
-            shift.User = UserManager.FindById(shift.UserId);
+            //shift.User = user;
             shift.DownTime = shiftCreateModel.DownTime;
             shift.ProductionPct = shiftCreateModel.ProductionPct;
             shift.TotalShiftWeight = shiftCreateModel.TotalShiftWeight;
 
             if (CheckExistense(shiftCreateModel))
             {
-                db.SaveChanges();
+                ShiftRepo.Update(shift);
+                ShiftRepo.Save();
             }
             else
             {
@@ -227,7 +240,8 @@ namespace KKU_DEMO.Managers
 
         public bool CheckExistense(ShiftCreateModel shiftCreateModel)
         {
-            var shift = db.Shift.FirstOrDefault(s => s.Date == shiftCreateModel.Date &&
+            var shifts = ShiftRepo.GetList();
+            var shift = shifts.FirstOrDefault(s => s.Date == shiftCreateModel.Date &&
                                                      s.Number == shiftCreateModel.Number &&
                                                      s.FactoryId == shiftCreateModel.FactoryId);
             if (shiftCreateModel.Id != null && shift != null)
@@ -280,13 +294,14 @@ namespace KKU_DEMO.Managers
         public bool CheckShiftsOnDay(DateTime day, int factoryId)
         {
             Shift shifts = null;
+            var Shifts = ShiftRepo.GetList();
             if (factoryId == 0)
             { 
-                 shifts = db.Shift.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString());
+                 shifts = Shifts.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString());
             }
             else
             {
-                shifts = db.Shift.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId==factoryId);
+                shifts = Shifts.FirstOrDefault(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId==factoryId);
             }
             return shifts != null;
         }
@@ -299,16 +314,16 @@ namespace KKU_DEMO.Managers
         {
             double totalweightByDay = 0;
 
-            var shifts = new List<Shift>();
+            var shifts = ShiftRepo.GetList(); ;
 
             if (factoryId == 0)
             {
-                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
+                shifts = shifts.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
 
             }
             else
             {
-                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId==factoryId).ToList();
+                shifts = shifts.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId==factoryId).ToList();
             }
             foreach (var s in shifts)
                 {
@@ -328,22 +343,22 @@ namespace KKU_DEMO.Managers
         public double GetShiftProductionByDay(DateTime day,int factoryId)
         {
             double ProductionByDay = 0;
-            var shifts = new List<Shift>();
+            var shifts = ShiftRepo.GetList();
 
             if (factoryId == 0)
             {
-                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
+                shifts = shifts.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString()).ToList();
 
             }
             else
             {
-                shifts = db.Shift.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId == factoryId).ToList();
+                shifts = shifts.Where(s => s.Date == day && s.State == StateEnum.CLOSED.ToString() && s.FactoryId == factoryId).ToList();
             }
             foreach (var s in shifts)
             {
                 ProductionByDay += s.ProductionPct;
             }
-            return (shifts.Count == 0) ? 0 : ProductionByDay / shifts.Count;
+            return (shifts.Count() == 0) ? 0 : ProductionByDay / shifts.Count();
         }
 
         /// <summary>
@@ -354,11 +369,11 @@ namespace KKU_DEMO.Managers
         /// <returns></returns>
         public List<Shift> GetByTimeInterval(DateTime start, DateTime end, int factoryId)
         {
-            var shifts = new List<Shift>();
+            var shifts = ShiftRepo.GetList();
             if (factoryId == 0)
             {
                 shifts =
-                    db.Shift.Where(
+                    shifts.Where(
                         c =>
                             c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <= 0 &&
                             c.State == StateEnum.CLOSED.ToString())
@@ -370,7 +385,7 @@ namespace KKU_DEMO.Managers
             else
             {
                 shifts =
-                db.Shift.Where(
+                shifts.Where(
                         c =>
                             c.Date.CompareTo(start) >= 0 && c.Date.CompareTo(end) <= 0 &&
                             c.State == StateEnum.CLOSED.ToString() && c.FactoryId==factoryId)
@@ -379,7 +394,7 @@ namespace KKU_DEMO.Managers
                     .ToList();
             }
             
-            return shifts;
+            return shifts.ToList();
         }
 
         /// <summary>
@@ -439,12 +454,17 @@ namespace KKU_DEMO.Managers
                         }
                     }
                 }
-                db.SaveChanges();
+                ShiftRepo.Save();
             }
             else
             {
                 throw new Exception("Ошибка поиска смены или датчика");
             }
+
         }
+     
+       
+      
     }
+   
 }

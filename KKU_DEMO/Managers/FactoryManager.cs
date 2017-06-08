@@ -4,22 +4,26 @@ using System.Linq;
 using System.Web;
 using KKU_DEMO.DAL;
 using KKU_DEMO.Models.DataModels;
+using KKU_DEMO.Repositories;
 
 namespace KKU_DEMO.Managers
 {
-    public class FactoryManager :IManager<Factory>
+    public class FactoryManager 
     {
-        private KKUContext db;
+        private IRepository<Factory> FactoryRepo;
 
         public FactoryManager()
         {
-            db = new KKUContext();
+            FactoryRepo = new FactoryRepository();
         }
 
         public List<Factory> GetAll()
         {
-            return db.Factory.ToList();
+            return FactoryRepo.GetList().ToList();
         }
+
+
+
 
         public Factory GetById(int id)
         {
@@ -40,5 +44,7 @@ namespace KKU_DEMO.Managers
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

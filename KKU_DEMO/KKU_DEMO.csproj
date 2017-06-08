@@ -298,6 +298,12 @@
     <Compile Include="Models\ViewModels\ShiftCreateModel.cs" />
     <Compile Include="Models\ViewModels\ShiftSearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CauseRepository.cs" />
+    <Compile Include="Repositories\FactoryRepository.cs" />
+    <Compile Include="Repositories\IncidentRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\SensorRepository.cs" />
+    <Compile Include="Repositories\ShiftRepository.cs" />
     <Compile Include="Stores\WebSessionStore.cs" />
   </ItemGroup>
   <ItemGroup>

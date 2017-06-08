@@ -11,19 +11,20 @@ using System.Text.RegularExpressions;
 using System.Web;
 using KKU_DEMO.DAL;
 using KKU_DEMO.Models;
+using KKU_DEMO.Repositories;
 
 namespace KKU_DEMO.Managers
 {
     public class SensorManager
     {
-        private KKUContext db;
+        private IRepository<Sensor> SensorRepo;
         private IncidentManager IncidentManager;
         private ShiftManager ShiftManager;
         private FileManager FileManager;
 
         public SensorManager()
         {
-            db = new KKUContext();
+            SensorRepo = new SensorRepository();
             IncidentManager = new IncidentManager();
             ShiftManager = new ShiftManager(this);
             FileManager = new FileManager();
@@ -31,29 +32,29 @@ namespace KKU_DEMO.Managers
 
         public List<Sensor> GetAll()
         {
-            return db.Sensor.ToList();
+            return SensorRepo.GetList().ToList();
         }
 
         public Sensor GetById(int id)
         {
-            return db.Sensor.Find(id);
+            return SensorRepo.Get(id);
         }
 
         public Sensor GetByToken(string token)
         {
-            return db.Sensor.FirstOrDefault(s => s.Token == token);
+            return SensorRepo.GetList().FirstOrDefault(s => s.Token == token);
         }
 
         public Sensor GetByFactoryId(int? id, string name)
         {
-            return db.Sensor.FirstOrDefault(s => s.FactoryId == id && s.Name == name);
+            return SensorRepo.GetList().FirstOrDefault(s => s.FactoryId == id && s.Name == name);
         }
 
         public void Create(Sensor sensor)
         {
             sensor.StateEnum = StateEnum.STOP;
-            db.Entry(sensor).State = EntityState.Added;
-            db.SaveChanges();
+            SensorRepo.Create(sensor);
+            SensorRepo.Save();
         }
 
         /// <summary>
@@ -129,8 +130,8 @@ namespace KKU_DEMO.Managers
                     throw;
                 }
 
-
-                db.SaveChanges();
+                SensorRepo.Update(sensor);
+                SensorRepo.Save();
                 
             }
             else
