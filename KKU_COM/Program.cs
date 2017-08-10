@@ -29,7 +29,7 @@ namespace KKU_COM
             var Url = "http://kovrovku.ru/API/WeightApi";
 
             SerialPort Com1 = new SerialPort("Com1", 19200, Parity.None, 8, StopBits.One);
-            string[] lineReadIn = new string[3];
+            string[] lineReadIn = new string[2];
             lineReadIn[0] = Token;
             string hex = "FF01C647FFFF";
            
@@ -51,61 +51,34 @@ namespace KKU_COM
                             Com1.Read(resVals, 0, resVals.Length);
                         }
 
-                        bool flag = false;
-                        List<byte> res1 = new List<byte>();
-                        List<byte> res2 = new List<byte>();
-
+                        List<byte> res = new List<byte>();
+                       
+                    
                         for (var i = 0; i < resVals.Length; i++)
                         {
-                           
-                            if (resVals[i] == 0x000d)
-                            {
-                                flag = true;
-                                i++;
-                            }
-                            if (flag == false)
-                            {
-                                res1.Add( resVals[i]); 
-                            }
-                            else
-                            {
-                                res2.Add(resVals[i]);
-                            }
+                            
+                             res.Add( resVals[i]); 
+                            
                         }
 
-                        string[] c = new string[2];
-                        // конвертим в строку
-                        c[0] = System.Text.Encoding.ASCII.GetString(res1.ToArray());
-                        c[1] = System.Text.Encoding.ASCII.GetString(res2.ToArray());
+                        string c = ByteArrayToString(res.ToArray());
 
-
-                        string curPattern = @"5TOP|-?\d+\.\d+|0";
-                        string totalPattern = @"\d+\.\d*|0";
-
-                        Regex curRegex = new Regex(curPattern);
-                        Regex totalRegex = new Regex(totalPattern);
-
-                        var curMatch = curRegex.Match(c[0]);
-                        var totalMatch = curRegex.Match(c[1]);
-
-
-                        lineReadIn[1] = curMatch.Value;
-                        lineReadIn[2] = totalMatch.Value;
-
-                        if (lineReadIn[2].EndsWith("."))
-                            lineReadIn[2] += "0";
+                        lineReadIn[1] = c;
+                       
 
                         Console.WriteLine( DateTime.Now);
-                        Console.WriteLine("Получено: --- " + c[0] +" | "+ c[1]);
-                        Console.WriteLine("Текущие показания: --- "+lineReadIn[1]+ " Всего: --- " +lineReadIn[2]);
-                        Console.WriteLine();
+                        Console.WriteLine("Получено: --- " + c );
                         Console.WriteLine("-------------------------------------------------------");
                         Console.WriteLine();
 
+                  
 
-                        SendReq(lineReadIn, Url);
+                        Task<string> result = SendReq(lineReadIn, Url);
+                        var finalResult = result.Result;
+                        Console.WriteLine(finalResult);
+                        Console.WriteLine("-------------------------------------------------------");
+
                         lineReadIn[1] = "";
-                        lineReadIn[2] = "";
                         Thread.Sleep(3000);
                         Com1.Write(vals, 0, vals.Length);
                     }
@@ -131,18 +104,28 @@ namespace KKU_COM
                 bytes[i/2] = Convert.ToByte(hex.Substring(i, 2), 16);
             return bytes;
         }
-
-
-        public static void SendReq(string[] body, string Url)
+        public static string ByteArrayToString(byte[] ba)
         {
+            string hex = BitConverter.ToString(ba);
+            return hex.Replace("-", "");
+        }
+
+        public static async Task<string> SendReq(string[] body, string Url)
+        {
+            System.Net.ServicePointManager.Expect100Continue = false;
             var client = new HttpClient();
             JsonSerializerSettings jsSettings = new JsonSerializerSettings();
             jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             string json = JsonConvert.SerializeObject(body, Formatting.None, jsSettings);
+            Console.WriteLine(Url);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            client.PutAsync(Url, content);
+            var response = await client.PostAsync(Url, content);
+            var contents = await response.Content.ReadAsStringAsync();
 
 
+
+        
+            return response.ToString();
         }
     }
 }

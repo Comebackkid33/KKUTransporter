@@ -134,6 +134,8 @@ namespace KKU_DEMO.Managers
             }
 
             var shifts = query.OrderBy(x => x.Date).ThenBy(x => x.Number).ToList();
+
+            
             return shifts;
         }
 
@@ -410,41 +412,58 @@ namespace KKU_DEMO.Managers
             //датчик отсева
             var wasteSensor = SensorManager.GetByFactoryId(id, "Отсев");
             bool flag = false;
+            Shift lastShift = null;
 
             if (shifts != null && totalSensor != null)
             {
-                for (int i = 0; i < shifts.Count() - 1; i++)
 
+                for (int i = 0; i < shifts.Count(); i++)
                 {
                     if (shifts[i].StateEnum == StateEnum.INPROCESS)
                     {
                         shifts[i].StateEnum = StateEnum.CLOSED;
                         shifts[i].DownTime = totalSensor.DownTime - shifts[i].DownTime;
                         shifts[i].TotalShiftWeight = totalSensor.TotalWeight - shifts[i].TotalShiftWeight;
-                        shifts[i].ProductionPct = (1 -
+
+                        if (shifts[i].TotalShiftWeight != 0)
+                        {
+                            shifts[i].ProductionPct = (1 -
                                                    (wasteSensor.TotalWeight - shifts[i].ProductionPct) /
                                                    shifts[i].TotalShiftWeight) * 100;
-
-
-                        flag = true;
-                        if (shifts[i + 1].Date == shifts[i].Date && shifts[i + 1].Number == shifts[i].Number + 1 ||
-                            shifts[i].Date.AddDays(1) == shifts[i + 1].Date && shifts[i + 1].Number == 1)
-                        {
-                            shifts[i + 1].StateEnum = StateEnum.INPROCESS;
-                            shifts[i + 1].TotalShiftWeight = totalSensor.TotalWeight;
-                            shifts[i + 1].ProductionPct = wasteSensor.TotalWeight;
-                            shifts[i + 1].DownTime = totalSensor.DownTime;
                         }
-
+                        else
+                        {
+                            shifts[i].ProductionPct = 0;
+                        }
+                        
+                        flag = true;
+                        lastShift = shifts[i];
                         break;
                     }
                 }
-                if (flag == false)
+                
+                if (flag)
+                {
+                    for (int i = 0; i < shifts.Count(); i++)
+                    {
+                        if (lastShift.Date == shifts[i].Date && lastShift.Number + 1 == shifts[i].Number ||
+                            lastShift.Date.AddDays(1) == shifts[i].Date && shifts[i].Number == 1)
+                        {
+                            shifts[i].StateEnum = StateEnum.INPROCESS;
+                            shifts[i].TotalShiftWeight = totalSensor.TotalWeight;
+                            shifts[i].ProductionPct = wasteSensor.TotalWeight;
+                            shifts[i].DownTime = totalSensor.DownTime;
+
+                            break;
+                        }
+                    }
+                }
+                else
                 {
                     for (int i = 0; i < shifts.Count(); i++)
 
                     {
-                        if (shifts[i].StateEnum == StateEnum.ASSIGNED)
+                        if (shifts[i].StateEnum == StateEnum.ASSIGNED && GetNumber(DateTime.Now)== shifts[i].Number && DateTime.Now.Date == shifts[i].Date.Date)
                         {
                             shifts[i].StateEnum = StateEnum.INPROCESS;
                             shifts[i].TotalShiftWeight = totalSensor.TotalWeight;
@@ -462,9 +481,26 @@ namespace KKU_DEMO.Managers
             }
 
         }
-     
-       
-      
+
+        public static int GetNumber(DateTime curDate)
+        {
+            var time = curDate.TimeOfDay;
+
+            switch (time.Hours)
+            {
+                case  8: return 1;
+                case 7: return 1;
+                case 16: return 2;
+                case 17: return 2;
+                case 0: return 3;
+                case  1: return 3;
+
+                default: return 0;
+            }
+        }
+
+
+
     }
    
 }

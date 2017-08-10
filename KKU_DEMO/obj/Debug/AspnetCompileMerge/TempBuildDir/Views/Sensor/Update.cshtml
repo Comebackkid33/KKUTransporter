@@ -42,7 +42,7 @@
                     @Html.DisplayNameFor(model => model.TotalWeight)
                 </th>
                 <th>
-                    NoLoadCount
+                    Текущий простой
                 </th>
                 <th>
 
@@ -54,7 +54,7 @@
         lastFactory = item.FactoryId;
 
 
-             <tr class="@(item.State == "OK" ? "success" : (item.State == "STOP" ? "danger" : "warning"))">
+             <tr class="@(item.State == "OK" ? "success" :(item.State == "OFF"? "active": (item.State == "STOP" ? "danger" : "warning")))">
           
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -73,23 +73,41 @@
                 @{
                     if (item.State != "OK")
                     {
+                        if (item.State == "OFF")
+                        {
+                            <p>Нет смены</p>
+                        }
+                        else
+                        {
                         <span class="glyphicon glyphicon-remove-circle"> </span>
 
-                    }
-                    else
-                    {
+                            }
+                        }
+                        else
+                        {
+
+
                         <b>
-                            @(String.Format("{0:0.00}", Double.Parse(item.CurWeight))) кг
+                            @Html.DisplayFor(modelItem => item.CurWeight) кг
 
                         </b>
+
+
+
                     }
-                }
+                    }
             </td>
             <td>
                 <b> @($"{item.TotalWeight:0.##}") т</b>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NoLoadCount)
+              
+                
+                @($"{item.NoLoadCount * 3 / 3600}") ч.
+                    
+                
+               
+                @($"{(item.NoLoadCount*3 % 3600) / 60}") мин. @($"{item.NoLoadCount*3 % 60}") сек.
             </td>
             <td>
 

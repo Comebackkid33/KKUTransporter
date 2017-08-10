@@ -64,7 +64,7 @@ namespace KKU_DEMO.Managers
         public void UpdateDecimal(string[] s)
         {
             //Количество тиков до объявления инцидента
-            int maxOffCount = 15;
+            int maxOffCount = 600;
             //Текущее состояние датчика
             StateEnum curState;
 
@@ -72,14 +72,30 @@ namespace KKU_DEMO.Managers
 
             Incident opIncident = null;
             var sensor = GetByToken(token);
-
-            Shift curShift = ShiftManager.GetByFactoryId(sensor.FactoryId, StateEnum.INPROCESS.ToString()).First();
-               
-            if (sensor != null && curShift != null)
+            Shift curShift;
+            var shifts = ShiftManager.GetByFactoryId(sensor.FactoryId, StateEnum.INPROCESS.ToString());
+            if (shifts.Count==0)
             {
-                opIncident = IncidentManager.GetIncident(curShift.Id, sensor.Id);
-
-                if (s[1].Contains("5TOP") || s[1] == "")
+                curShift = null;
+            }
+            else
+            {
+                curShift = shifts.First();
+            }
+               
+            if (sensor != null )
+            {
+                if (curShift != null)
+                {
+                    opIncident = IncidentManager.GetIncident(curShift.Id, sensor.Id);
+                    
+                }
+                if (curShift == null)
+                {
+                    curState = StateEnum.OFF;
+                    sensor.NoLoadCount = 0;
+                }
+                else if (s[1].Contains("5TOP") || s[1] == "")
                 {
                     curState = StateEnum.STOP;
                     if (curShift != null)
@@ -98,6 +114,7 @@ namespace KKU_DEMO.Managers
                         sensor.DownTime += 3;
                     }
                 }
+               
                 else
                 {
                     curState = StateEnum.OK;
@@ -123,7 +140,11 @@ namespace KKU_DEMO.Managers
                 
                 try
                 {
-                    FileManager.WrightData("\\sensor_" + sensor.Id + "_Log.txt",sensor.ToString());
+                    var path = "\\sensor_" + sensor.Id + "_Log.txt";
+                    FileManager.WrightData(path,sensor.ToString());
+
+                    
+
                 }
                 catch (Exception)
                 {

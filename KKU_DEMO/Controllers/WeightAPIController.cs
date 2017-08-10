@@ -41,8 +41,8 @@ namespace KKU_DEMO.Controllers
             }
             catch (Exception e)
             {
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                response.Content = new StringContent("Cant find free shifts in requested factory");
+                var response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                response.Content = new StringContent(e.Message);
                 return response;
             }
         }

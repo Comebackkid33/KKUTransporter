@@ -69,7 +69,7 @@
         $("#Button").click(function () {
             onBegin();
             $.ajax({
-                url: "@Strings.HostUrl/Stat/GetByPeriod/?Start=" + $("#Date0").val() + "&End=" + $("#Date1").val() +  "&FactoryId=" + $("#FactoryId").val(),
+                url: "@(Url.Action("GetByPeriod", "Stat"))" + "/?Start=" + $("#Date0").val() + "&End=" + $("#Date1").val() +  "&FactoryId=" + $("#FactoryId").val(),
                 cache: false,
                 success: function (html) {
                     onComplete();

@@ -28,7 +28,7 @@ namespace TestSensor
 
         private static void Main(string[] args)
         {
-            var Url = "http://192.168.0.36/KKU_DEMO/API/WeightApi";
+            var Url = "http://kovrovku.ru/API/WeightApi";
 
             Random r = new Random();
             int range = 1;
